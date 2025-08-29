@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Sign Language to Text</h1>
+    </header>
+    <div class="container">
+        <video id="video" style="display: none;"></video>
+        <canvas id="canvas" width="640px" height="480px"></canvas>
+        <div id="output"></div>
+    </div>
+
+    <div id="chat-bubble">
+        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat"/>
+    </div>
+
+    <div id="chat-window">
+        <div id="chat-header">
+            <h2>Sign Language Bot</h2>
+            <button id="close-chat">X</button>
+        </div>
+        <div id="chat-body">
+            <div class="chat-message bot">
+                <p>Hello! I'm the Sign Language Bot. Ask me anything about this project or sign language!</p>
+            </div>
+        </div>
+        <div id="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask a question...">
+            <button id="chat-send">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
