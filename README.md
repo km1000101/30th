@@ -46,6 +46,7 @@ A real-time Indian Sign Language (ISL) detection system that translates hand ges
 - Modern web browser with camera access
 - Internet connection for AI model loading
 - Camera device (webcam or mobile camera)
+- Microphone access for voice recognition (optional)
 
 ### Installation
 1. Clone the repository
@@ -53,6 +54,12 @@ A real-time Indian Sign Language (ISL) detection system that translates hand ges
 3. Allow camera access when prompted
 4. Wait for the AI model to load
 5. Start using sign language gestures!
+
+### Using Voice Recognition
+1. **Click the microphone button** in the "Voice to Sign Language" section
+2. **Speak clearly** when the button shows "Listening..."
+3. **View the matching GIF** that appears based on your speech
+4. **Try different phrases** - the system understands various ways to say each sign
 
 ### Usage
 1. **Allow Camera Access**: Grant permission when prompted
@@ -66,6 +73,12 @@ The system currently recognizes:
 - **Hello** - Wave your hand in greeting
 - **Thank You** - Touch your chin and move forward
 - **I Love You** - Extend thumb, index, and pinky
+
+### Voice Recognition Keywords
+The speech recognition system understands various ways to say each sign:
+- **Hello**: "hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening"
+- **Thank You**: "thank you", "thanks", "thank", "grateful", "appreciate", "bless you"
+- **I Love You**: "i love you", "love you", "love", "heart", "care", "affection"
 - **How Are You** - Point to yourself then others
 
 ## 🎯 Key Features
@@ -74,6 +87,12 @@ The system currently recognizes:
 - Instant sign language recognition
 - Live camera feed with landmark visualization
 - Continuous monitoring and updates
+
+### Voice-to-Sign Translation
+- **NEW!** Speech recognition for hands-free operation
+- Speak to see matching ISL GIFs instantly
+- Supports natural language variations
+- Real-time audio processing and feedback
 
 ### Interactive Tutorial
 - Visual examples of supported signs

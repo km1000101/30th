@@ -70,6 +70,40 @@
 
             </aside>
         </div>
+        
+        <!-- Audio Input Section -->
+        <div class="audio-section">
+            <div class="audio-container">
+                <div class="audio-header">
+                    <h2>Voice to Sign Language</h2>
+                    <p>Speak to see the matching sign language gesture</p>
+                </div>
+                
+                <div class="audio-controls">
+                    <button id="mic-button" class="mic-button" aria-label="Start voice recognition">
+                        <div class="mic-icon">🎤</div>
+                        <span class="mic-text">Click to Speak</span>
+                    </button>
+                    <div class="audio-status">
+                        <span id="audio-status-text">Ready to listen</span>
+                    </div>
+                </div>
+                
+                <div class="audio-output">
+                    <div class="speech-display">
+                        <h3>You Said:</h3>
+                        <div id="speech-text" class="speech-text">Click the microphone and speak...</div>
+                    </div>
+                    
+                    <div class="gif-display">
+                        <h3>Matching Sign:</h3>
+                        <div id="gif-container" class="gif-container">
+                            <div class="placeholder-text">Sign will appear here</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Help Section -->

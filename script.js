@@ -92,11 +92,154 @@ const statusText = document.querySelector('.status-text');
 const statusDot = document.querySelector('.status-dot');
 const cameraOverlay = document.querySelector('.camera-overlay');
 
+// Audio Input Elements
+const micButton = document.getElementById('mic-button');
+const audioStatusText = document.getElementById('audio-status-text');
+const speechText = document.getElementById('speech-text');
+const gifContainer = document.getElementById('gif-container');
+
 // State variables
 let model;
 let sequence = [];
 const SEQUENCE_LENGTH = 30;
 const actions = ['i love you', 'thank you', 'hello']; // The actions your model can predict
+
+// Speech Recognition Setup
+let recognition;
+let isRecording = false;
+
+// Initialize speech recognition
+function initSpeechRecognition() {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        
+        recognition.onstart = () => {
+            isRecording = true;
+            micButton.classList.add('recording');
+            micButton.querySelector('.mic-text').textContent = 'Listening...';
+            audioStatusText.textContent = 'Listening...';
+            speechText.textContent = 'Listening...';
+        };
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript.toLowerCase();
+            speechText.textContent = transcript;
+            audioStatusText.textContent = 'Processing...';
+            
+            // Find matching GIF
+            const matchingGif = findMatchingGif(transcript);
+            if (matchingGif) {
+                displayGif(matchingGif);
+                audioStatusText.textContent = 'GIF found!';
+            } else {
+                displayNoMatch();
+                audioStatusText.textContent = 'No matching sign found';
+            }
+        };
+        
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            audioStatusText.textContent = 'Error: ' + event.error;
+            resetMicButton();
+        };
+        
+        recognition.onend = () => {
+            resetMicButton();
+        };
+        
+        console.log('Speech recognition initialized');
+    } else {
+        console.warn('Speech recognition not supported');
+        micButton.style.display = 'none';
+        audioStatusText.textContent = 'Speech recognition not supported in this browser';
+    }
+}
+
+// Find matching GIF based on speech input
+function findMatchingGif(speech) {
+    const speechWords = speech.split(' ');
+    
+    // Define keyword mappings for each GIF
+    const gifMappings = {
+        'hello': {
+            keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'],
+            gifPath: 'ISL_Gifs/hello.gif',
+            description: 'Hello sign'
+        },
+        'thank you': {
+            keywords: ['thank you', 'thanks', 'thank', 'grateful', 'appreciate', 'bless you'],
+            gifPath: 'ISL_Gifs/thank you.gif',
+            description: 'Thank you sign'
+        },
+        'i love you': {
+            keywords: ['i love you', 'love you', 'love', 'heart', 'care', 'affection'],
+            gifPath: 'ISL_Gifs/i love you.gif',
+            description: 'I love you sign'
+        }
+    };
+    
+    // Check for exact matches first
+    for (const [key, mapping] of Object.entries(gifMappings)) {
+        if (speech.includes(key)) {
+            return mapping;
+        }
+    }
+    
+    // Check for keyword matches
+    for (const [key, mapping] of Object.entries(gifMappings)) {
+        for (const keyword of mapping.keywords) {
+            if (speechWords.some(word => word.includes(keyword) || keyword.includes(word))) {
+                return mapping;
+            }
+        }
+    }
+    
+    return null;
+}
+
+// Display the matching GIF
+function displayGif(gifMapping) {
+    gifContainer.innerHTML = `
+        <img src="${gifMapping.gifPath}" alt="${gifMapping.description}" class="matching-gif">
+        <div class="gif-label">${gifMapping.description}</div>
+    `;
+}
+
+// Display no match message
+function displayNoMatch() {
+    gifContainer.innerHTML = `
+        <div class="no-match">
+            <div class="no-match-icon">❓</div>
+            <div class="no-match-text">No matching sign found</div>
+            <div class="no-match-hint">Try saying: "hello", "thank you", or "i love you"</div>
+        </div>
+    `;
+}
+
+// Reset microphone button
+function resetMicButton() {
+    isRecording = false;
+    micButton.classList.remove('recording');
+    micButton.querySelector('.mic-text').textContent = 'Click to Speak';
+    audioStatusText.textContent = 'Ready to listen';
+}
+
+// Toggle speech recognition
+function toggleSpeechRecognition() {
+    if (isRecording) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+        } catch (error) {
+            console.error('Error starting speech recognition:', error);
+            audioStatusText.textContent = 'Error starting recognition';
+        }
+    }
+}
 
 // Add these configurations at the top of your file
 const holisticConfig = {
@@ -273,6 +416,14 @@ async function main() {
 
 // Initialize the system
 main();
+
+// Initialize speech recognition
+initSpeechRecognition();
+
+// Add microphone button event listener
+if (micButton) {
+    micButton.addEventListener('click', toggleSpeechRecognition);
+}
 
 // Chatbot logic
 const chatBubble = document.getElementById('chat-bubble');
