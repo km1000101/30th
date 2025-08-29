@@ -82,11 +82,17 @@
     animate();
 })();
 
+// DOM Elements
 const videoElement = document.getElementById('video');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
 const outputElement = document.getElementById('output');
+const loadingOverlay = document.getElementById('loading-overlay');
+const statusText = document.querySelector('.status-text');
+const statusDot = document.querySelector('.status-dot');
+const cameraOverlay = document.querySelector('.camera-overlay');
 
+// State variables
 let model;
 let sequence = [];
 const SEQUENCE_LENGTH = 30;
@@ -116,6 +122,37 @@ const constraints = {
     }
 };
 
+// Status update functions
+function updateStatus(message, type = 'info') {
+    if (statusText) {
+        statusText.textContent = message;
+        
+        // Update status dot color based on type
+        if (statusDot) {
+            statusDot.style.background = type === 'error' ? '#ff4444' : 
+                                       type === 'success' ? '#44ff44' : '#f39108';
+        }
+    }
+}
+
+function hideLoadingOverlay() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
+
+function showCameraOverlay() {
+    if (cameraOverlay) {
+        cameraOverlay.style.display = 'block';
+    }
+}
+
+function hideCameraOverlay() {
+    if (cameraOverlay) {
+        cameraOverlay.style.display = 'none';
+    }
+}
+
 // Function to extract keypoints from MediaPipe results
 function extractKeypoints(results) {
     const pose = results.poseLandmarks ? results.poseLandmarks.map(res => [res.x, res.y, res.z, res.visibility]).flat() : new Array(33 * 4).fill(0);
@@ -124,7 +161,6 @@ function extractKeypoints(results) {
     const rh = results.rightHandLandmarks ? results.rightHandLandmarks.map(res => [res.x, res.y, res.z]).flat() : new Array(21 * 3).fill(0);
     return [...pose, ...face, ...lh, ...rh];
 }
-
 
 async function onResults(results) {
     canvasCtx.save();
@@ -141,51 +177,101 @@ async function onResults(results) {
     drawLandmarks(canvasCtx, results.rightHandLandmarks, { color: '#FF0000', lineWidth: 2 });
     canvasCtx.restore();
 
+    // Hide camera overlay when landmarks are detected
+    if (results.poseLandmarks || results.leftHandLandmarks || results.rightHandLandmarks) {
+        hideCameraOverlay();
+    }
+
     // Prediction logic
     const keypoints = extractKeypoints(results);
     sequence.push(keypoints);
     sequence = sequence.slice(-SEQUENCE_LENGTH); // Keep the sequence to the last 30 frames
 
     if (model && sequence.length === SEQUENCE_LENGTH) {
-        const tensor = tf.tensor([sequence]);
-        const prediction = await model.predict(tensor).data();
-        tensor.dispose();
-        
-        const predictedIndex = prediction.indexOf(Math.max(...prediction));
-        const predictedAction = actions[predictedIndex];
-        
-        if (outputElement.innerText !== predictedAction) {
-            outputElement.innerText = predictedAction;
-            const utterance = new SpeechSynthesisUtterance(predictedAction);
-            speechSynthesis.speak(utterance);
+        try {
+            const tensor = tf.tensor([sequence]);
+            const prediction = await model.predict(tensor).data();
+            tensor.dispose();
+            
+            const predictedIndex = prediction.indexOf(Math.max(...prediction));
+            const predictedAction = actions[predictedIndex];
+            
+            if (outputElement.innerText !== predictedAction) {
+                outputElement.innerText = predictedAction;
+                
+                // Text-to-speech
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(predictedAction);
+                    utterance.rate = 0.8;
+                    utterance.pitch = 1.2;
+                    speechSynthesis.speak(utterance);
+                }
+                
+                // Update status
+                updateStatus(`Detected: ${predictedAction}`, 'success');
+            }
+        } catch (error) {
+            console.error('Prediction error:', error);
+            updateStatus('Prediction error', 'error');
         }
     }
 }
 
 async function main() {
-    // Load the model
-    console.log('Loading model...');
-    model = await tf.loadLayersModel('model/model.json');
-    console.log('Model loaded.');
-
-    // Initialize MediaPipe Holistic
-    const holistic = new Holistic(holisticConfig);
-
-    holistic.setOptions(modelConfig);
-
-    holistic.onResults(onResults);
-
-    // Setup camera
-    const camera = new Camera(videoElement, {
-        onFrame: async () => {
-            await holistic.send({ image: videoElement });
-        },
-        width: 640,
-        height: 480
-    });
-    camera.start();
+    try {
+        // Show loading overlay
+        updateStatus('Loading AI Model...', 'info');
+        
+        // Load the model
+        console.log('Loading model...');
+        model = await tf.loadLayersModel('model/model.json');
+        console.log('Model loaded.');
+        
+        updateStatus('Model loaded successfully!', 'success');
+        
+        // Initialize MediaPipe Holistic
+        updateStatus('Initializing MediaPipe...', 'info');
+        const holistic = new Holistic(holisticConfig);
+        holistic.setOptions(modelConfig);
+        holistic.onResults(onResults);
+        
+        updateStatus('Setting up camera...', 'info');
+        
+        // Setup camera
+        const camera = new Camera(videoElement, {
+            onFrame: async () => {
+                await holistic.send({ image: videoElement });
+            },
+            width: 640,
+            height: 480
+        });
+        
+        camera.start();
+        
+        // Hide loading overlay and show camera overlay
+        setTimeout(() => {
+            hideLoadingOverlay();
+            updateStatus('Camera active - Ready for detection', 'success');
+            showCameraOverlay();
+        }, 1000);
+        
+    } catch (error) {
+        console.error('Initialization error:', error);
+        updateStatus('Failed to initialize system', 'error');
+        
+        // Show error message to user
+        if (outputElement) {
+            outputElement.innerHTML = '<span style="color: #ff4444;">Error: Failed to load system</span>';
+        }
+        
+        // Hide loading overlay after error
+        setTimeout(() => {
+            hideLoadingOverlay();
+        }, 2000);
+    }
 }
 
+// Initialize the system
 main();
 
 // Chatbot logic
@@ -196,9 +282,11 @@ const chatInput = document.getElementById('chat-input');
 const chatSend = document.getElementById('chat-send');
 const chatBody = document.getElementById('chat-body');
 
+// Chat functionality
 chatBubble.addEventListener('click', () => {
     chatWindow.style.display = 'flex';
     chatBubble.style.display = 'none';
+    chatInput.focus();
 });
 
 closeChat.addEventListener('click', () => {
@@ -223,8 +311,19 @@ async function sendMessage() {
     appendMessage(userMessage, 'user');
     chatInput.value = '';
 
-    const botResponse = await getBotResponse(userMessage);
-    appendMessage(botResponse, 'bot');
+    // Show typing indicator
+    const typingIndicator = appendMessage('Typing...', 'bot');
+    
+    try {
+        const botResponse = await getBotResponse(userMessage);
+        
+        // Remove typing indicator and show actual response
+        typingIndicator.remove();
+        appendMessage(botResponse, 'bot');
+    } catch (error) {
+        typingIndicator.remove();
+        appendMessage('Sorry, I encountered an error. Please try again.', 'bot');
+    }
 }
 
 function appendMessage(message, sender) {
@@ -235,6 +334,7 @@ function appendMessage(message, sender) {
     messageElement.appendChild(p);
     chatBody.appendChild(messageElement);
     chatBody.scrollTop = chatBody.scrollHeight;
+    return messageElement;
 }
 
 async function getBotResponse(message) {
@@ -255,9 +355,8 @@ async function getBotResponse(message) {
   const isAllowed = allowedTopics.some(topic => lowerCaseMessage.includes(topic));
   
   if (!isAllowed) {
-    return "Sorry, I can only answer questions about sign language or the technology used in this project.";
+    return "Sorry, I can only answer questions about sign language or the technology used in this project. Feel free to ask about MediaPipe, TensorFlow, computer vision, or sign language in general!";
   }
-
 
   try {
     const response = await fetch(endpoint, {
@@ -266,11 +365,16 @@ async function getBotResponse(message) {
       body: JSON.stringify({
         contents: [{
           parts: [{
-            text: `Answer only about sign language or the technology used in this sign language detection project. Stay on topic. Question: "${message}"`
+            text: `Answer only about sign language or the technology used in this sign language detection project. Stay on topic and be helpful. Question: "${message}"`
           }]
         }]
       })
     });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const data = await response.json();
 
     console.log(data);
@@ -294,11 +398,46 @@ async function getBotResponse(message) {
       responseText = responseText.replace(/\n{3,}/g, '\n\n').trim();
       return responseText;
     } else {
-      return "Sorry, I couldn't get an answer from Gemini API.";
+      return "Sorry, I couldn't get a proper response from the AI service. Please try asking your question again.";
     }
   } catch (error) {
-    return "Sorry, there was an error connecting to Gemini API.";
+    console.error('Chat API error:', error);
+    return "Sorry, there was an error connecting to the AI service. Please check your internet connection and try again.";
   }
+}
+
+// Keyboard navigation for accessibility
+document.addEventListener('keydown', (e) => {
+    // Escape key to close chat
+    if (e.key === 'Escape' && chatWindow.style.display === 'flex') {
+        chatWindow.style.display = 'none';
+        chatBubble.style.display = 'flex';
+    }
+    
+    // Ctrl/Cmd + K to open chat
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        if (chatWindow.style.display !== 'flex') {
+            chatWindow.style.display = 'flex';
+            chatBubble.style.display = 'none';
+            chatInput.focus();
+        }
+    }
+});
+
+// Auto-hide camera overlay after a delay
+setTimeout(() => {
+    if (cameraOverlay) {
+        cameraOverlay.style.opacity = '0.6';
+    }
+}, 5000);
+
+// Performance optimization: Reduce background animation on mobile
+if (window.innerWidth <= 768) {
+    const nodeCanvas = document.getElementById('node-bg-canvas');
+    if (nodeCanvas) {
+        nodeCanvas.style.display = 'none';
+    }
 }
 
 

@@ -1,11 +1,11 @@
-    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Language Detection</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Sign Language to Text Translator - Real-time ISL Detection</title>
+    <meta name="description" content="Real-time Indian Sign Language detection using AI and computer vision. Translate hand gestures to text instantly.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
@@ -13,51 +13,117 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Background animation removed -->
+    <!-- Background animation canvas -->
+    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
+    
     <header class="header">
-        <h1></h1>
+        <div class="header-content">
+            <h1>Sign Language Translator</h1>
+            <p class="subtitle">Real-time Indian Sign Language Detection using AI</p>
+        </div>
     </header>
 
-    <div class="main-flex-row">
-        <div class="container">
-            <video id="video" style="display: none;"></video>
-        <canvas id="canvas" width="700px" height="500px"></canvas>
-            <div id="output"></div>
+    <main class="main-content">
+        <div class="main-flex-row">
+            <div class="container">
+                <div class="camera-section">
+                    <div class="camera-header">
+                        <h2>Live Camera Feed</h2>
+                        <div class="status-indicator">
+                            <span class="status-dot"></span>
+                            <span class="status-text">Initializing...</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video id="video" style="display: none;"></video>
+                        <canvas id="canvas" width="700px" height="500px"></canvas>
+                        <div class="camera-overlay">
+                            <div class="overlay-text">Position your hands in the camera view</div>
+                        </div>
+                    </div>
+                    
+                    <div class="detection-output">
+                        <h3>Detected Sign:</h3>
+                        <div id="output" class="output-text">Waiting for detection...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <aside class="tutorial-panel">
+                <div class="tutorial-title">Try These Signs</div>
+                <div class="tutorial-section">
+                    <h3>Hello</h3>
+                    <img src="ISL_Gifs/hello.gif" alt="Hello sign demonstration" class="tutorial-gif">
+                    <p class="sign-description">Wave your hand in greeting</p>
+                </div>
+                <div class="tutorial-section">
+                    <h3>Thank You</h3>
+                    <img src="ISL_Gifs/thank you.gif" alt="Thank you sign demonstration" class="tutorial-gif">
+                    <p class="sign-description">Touch your chin and move forward</p>
+                </div>
+                <div class="tutorial-section">
+                    <h3>I Love You</h3>
+                    <img src="ISL_Gifs/i love you.gif" alt="I love you sign demonstration" class="tutorial-gif">
+                    <p class="sign-description">Extend thumb, index, and pinky</p>
+                </div>
+
+            </aside>
         </div>
-        <aside class="tutorial-panel">
-            <div class="tutorial-title">Try these Signs</div>
-            <div class="tutorial-section">
-                <h3>Hello</h3>
-                <img src="ISL_Gifs/hello.gif" alt="Hello sign" class="tutorial-gif">
+    </main>
+
+    <!-- Help Section -->
+    <section class="help-section">
+        <div class="help-content">
+            <h2>How to Use</h2>
+            <div class="help-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Allow camera access when prompted</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Position your hands clearly in the camera view</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Perform the sign language gesture</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p>View the detected text in real-time</p>
+                </div>
             </div>
-            <div class="tutorial-section">
-                <h3>Thank You</h3>
-                <img src="ISL_Gifs/thank you.gif" alt="Thank you sign" class="tutorial-gif">
-            </div>
-            <div class="tutorial-section">
-                <h3>I Love You</h3>
-                <img src="ISL_Gifs/i love you.gif" alt="I love you sign" class="tutorial-gif">
-            </div>
-        </aside>
+        </div>
+    </section>
+
+    <!-- Chat Support -->
+    <div id="chat-bubble" class="chat-bubble" aria-label="Open chat support">
+        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Support"/>
     </div>
 
-    <div id="chat-bubble">
-        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat"/>
-    </div>
-
-    <div id="chat-window">
-        <div id="chat-header">
-            <h2>Sign Language Bot</h2>
-            <button id="close-chat">X</button>
+    <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-header">
+        <div id="chat-header" class="chat-header">
+            <h2 id="chat-title">Sign Language Bot</h2>
+            <button id="close-chat" aria-label="Close chat">×</button>
         </div>
-        <div id="chat-body">
+        <div id="chat-body" class="chat-body">
             <div class="chat-message bot">
-                <p>Hello! I'm the Sign Language Bot. Ask me anything about this project or sign language!</p>
+                <p>Hello! I'm your Sign Language Assistant. Ask me anything about this project, sign language, or the technology behind it!</p>
             </div>
         </div>
-        <div id="chat-footer">
-            <input type="text" id="chat-input" placeholder="Ask a question...">
-            <button id="chat-send">Send</button>
+        <div id="chat-footer" class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask a question..." aria-label="Type your message">
+            <button id="chat-send" aria-label="Send message">Send</button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Loading AI Model...</h3>
+            <p>Please wait while we initialize the sign language detection system</p>
         </div>
     </div>
 
