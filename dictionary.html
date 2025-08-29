@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Dictionary - Sign Language Translator</title>
+    <meta name="description" content="Comprehensive Indian Sign Language dictionary with searchable signs, categories, and detailed explanations.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Background animation canvas -->
+    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
+    
+    <header class="header">
+        <div class="header-content">
+            <h1>Sign Language Dictionary</h1>
+            <p class="subtitle">Search and learn Indian Sign Language signs</p>
+            
+            <!-- Navigation Menu -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="learn.html" class="nav-link">Learn to Sign</a></li>
+                    <li><a href="dictionary.html" class="nav-link active">Sign Dictionary</a></li>
+                    <li><a href="practice.html" class="nav-link">Practice Mode</a></li>
+                    <li><a href="about.html" class="nav-link">About ISL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search for signs..." class="search-input">
+                    <button class="search-btn" onclick="searchSigns()">
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+                <div class="search-filters">
+                    <select id="category-filter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="greetings">Greetings</option>
+                        <option value="family">Family & People</option>
+                        <option value="food">Food & Dining</option>
+                        <option value="health">Health & Emergency</option>
+                        <option value="education">Education & Work</option>
+                        <option value="travel">Travel & Places</option>
+                        <option value="emotions">Emotions & Feelings</option>
+                        <option value="numbers">Numbers & Time</option>
+                        <option value="colors">Colors & Objects</option>
+                    </select>
+                    <select id="difficulty-filter" class="filter-select">
+                        <option value="">All Difficulties</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Categories -->
+        <section class="quick-categories">
+            <h2 class="section-title">Quick Categories</h2>
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="">All Signs</button>
+                <button class="category-btn" data-category="greetings">👋 Greetings</button>
+                <button class="category-btn" data-category="family">👨‍👩‍👧‍👦 Family</button>
+                <button class="category-btn" data-category="food">🍽️ Food</button>
+                <button class="category-btn" data-category="health">🏥 Health</button>
+                <button class="category-btn" data-category="education">🏫 Education</button>
+                <button class="category-btn" data-category="travel">🌍 Travel</button>
+                <button class="category-btn" data-category="emotions">😊 Emotions</button>
+                <button class="category-btn" data-category="numbers">🔢 Numbers</button>
+                <button class="category-btn" data-category="colors">🎨 Colors</button>
+            </div>
+        </section>
+
+        <!-- Signs Grid -->
+        <section class="signs-section">
+            <div class="signs-header">
+                <h2 class="section-title">Sign Language Dictionary</h2>
+                <div class="results-info">
+                    <span id="results-count">Showing all signs</span>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">Grid</button>
+                        <button class="view-btn" data-view="list">List</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signs-grid" id="signs-container">
+                <!-- Signs will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Featured Signs -->
+        <section class="featured-signs">
+            <h2 class="section-title">Featured Signs</h2>
+            <div class="featured-container">
+                <div class="featured-sign">
+                    <div class="sign-video">
+                        <img src="ISL_Gifs/hello.gif" alt="Hello sign" class="sign-gif">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="sign-info">
+                        <h3>Hello</h3>
+                        <p class="sign-description">A friendly greeting sign</p>
+                        <div class="sign-meta">
+                            <span class="difficulty beginner">Beginner</span>
+                            <span class="category">Greetings</span>
+                        </div>
+                        <button class="learn-sign-btn" onclick="showSignDetails('hello')">Learn More</button>
+                    </div>
+                </div>
+                
+                <div class="featured-sign">
+                    <div class="sign-video">
+                        <img src="ISL_Gifs/thank you.gif" alt="Thank you sign" class="sign-gif">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="sign-info">
+                        <h3>Thank You</h3>
+                        <p class="sign-description">Expression of gratitude</p>
+                        <div class="sign-meta">
+                            <span class="difficulty beginner">Beginner</span>
+                            <span class="category">Greetings</span>
+                        </div>
+                        <button class="learn-sign-btn" onclick="showSignDetails('thank you')">Learn More</button>
+                    </div>
+                </div>
+                
+                <div class="featured-sign">
+                    <div class="sign-video">
+                        <img src="ISL_Gifs/i love you.gif" alt="I love you sign" class="sign-gif">
+                        <div class="play-overlay">▶️</div>
+                    </div>
+                    <div class="sign-info">
+                        <h3>I Love You</h3>
+                        <p class="sign-description">Expression of love and affection</p>
+                        <div class="sign-meta">
+                            <span class="difficulty beginner">Beginner</span>
+                            <span class="category">Emotions</span>
+                        </div>
+                        <button class="learn-sign-btn" onclick="showSignDetails('i love you')">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="floating-action-btn" aria-label="Scroll to top" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- Chat Support -->
+    <div id="chat-bubble" class="chat-bubble" aria-label="Open chat support">
+        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Support"/>
+    </div>
+
+    <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-header">
+        <div id="chat-header" class="chat-header">
+            <h2 id="chat-title">Sign Language Bot</h2>
+            <button id="close-chat" aria-label="Close chat">×</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="chat-message bot">
+                <p>Hello! I'm here to help you with the Sign Language Dictionary. Ask me about any sign or how to use the dictionary!</p>
+            </div>
+        </div>
+        <div id="chat-footer" class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask about a sign..." aria-label="Type your message">
+            <button id="chat-send" aria-label="Send message">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="dictionary.js"></script>
+</body>
+</html>

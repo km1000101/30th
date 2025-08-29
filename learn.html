@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Indian Sign Language - Sign Language Translator</title>
+    <meta name="description" content="Learn Indian Sign Language with interactive lessons, video tutorials, and practice exercises.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Background animation canvas -->
+    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
+    
+    <header class="header">
+        <div class="header-content">
+            <h1>Learn Indian Sign Language</h1>
+            <p class="subtitle">Master ISL with interactive lessons and practice</p>
+            
+            <!-- Navigation Menu -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="learn.html" class="nav-link active">Learn to Sign</a></li>
+                    <li><a href="dictionary.html" class="nav-link">Sign Dictionary</a></li>
+                    <li><a href="practice.html" class="nav-link">Practice Mode</a></li>
+                    <li><a href="about.html" class="nav-link">About ISL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Learning Categories Section -->
+        <section class="learning-categories">
+            <h2 class="section-title">Choose Your Learning Path</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">👋</div>
+                    <h3>Basic Greetings</h3>
+                    <p>Learn essential greetings and common phrases</p>
+                    <div class="category-stats">
+                        <span>5 lessons</span>
+                        <span>Beginner</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('greetings')">Start Learning</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family & People</h3>
+                    <p>Signs for family members and relationships</p>
+                    <div class="category-stats">
+                        <span>8 lessons</span>
+                        <span>Beginner</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('family')">Start Learning</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🍽️</div>
+                    <h3>Food & Dining</h3>
+                    <p>Signs for food items and dining situations</p>
+                    <div class="category-stats">
+                        <span>6 lessons</span>
+                        <span>Beginner</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('food')">Start Learning</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🏥</div>
+                    <h3>Health & Emergency</h3>
+                    <p>Important signs for health and emergency situations</p>
+                    <div class="category-stats">
+                        <span>4 lessons</span>
+                        <span>Intermediate</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('health')">Start Learning</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🏫</div>
+                    <h3>Education & Work</h3>
+                    <p>Signs for educational and workplace communication</p>
+                    <div class="category-stats">
+                        <span>7 lessons</span>
+                        <span>Intermediate</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('education')">Start Learning</button>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🌍</div>
+                    <h3>Travel & Places</h3>
+                    <p>Signs for travel, directions, and locations</p>
+                    <div class="category-stats">
+                        <span>6 lessons</span>
+                        <span>Intermediate</span>
+                    </div>
+                    <button class="start-learning-btn" onclick="startCategory('travel')">Start Learning</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Lesson Section -->
+        <section class="featured-lesson">
+            <h2 class="section-title">Featured Lesson: Basic Greetings</h2>
+            <div class="lesson-container">
+                <div class="lesson-video">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶️</div>
+                        <p>Click to start lesson</p>
+                    </div>
+                </div>
+                <div class="lesson-content">
+                    <h3>Lesson 1: Hello & Goodbye</h3>
+                    <div class="lesson-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text">0% Complete</span>
+                    </div>
+                    <div class="lesson-steps">
+                        <div class="step-item completed">
+                            <span class="step-number">1</span>
+                            <span class="step-text">Watch the demonstration</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <span class="step-text">Practice the sign</span>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <span class="step-text">Take the quiz</span>
+                        </div>
+                    </div>
+                    <button class="start-lesson-btn" onclick="startLesson()">Start Lesson</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Tips Section -->
+        <section class="learning-tips">
+            <h2 class="section-title">Learning Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h4>Practice Daily</h4>
+                    <p>Even 10 minutes of daily practice can significantly improve your signing skills.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">👥</div>
+                    <h4>Find a Partner</h4>
+                    <p>Practice with friends or family members to make learning more interactive and fun.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📱</div>
+                    <h4>Use Technology</h4>
+                    <p>Record yourself signing and compare with the tutorials to identify areas for improvement.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🧠</div>
+                    <h4>Be Patient</h4>
+                    <p>Learning sign language takes time. Focus on progress, not perfection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Tracking Section -->
+        <section class="progress-tracking">
+            <h2 class="section-title">Your Learning Progress</h2>
+            <div class="progress-overview">
+                <div class="progress-card">
+                    <h3>Overall Progress</h3>
+                    <div class="progress-circle">
+                        <div class="progress-number">0%</div>
+                    </div>
+                    <p>0 of 36 lessons completed</p>
+                </div>
+                <div class="progress-card">
+                    <h3>Current Streak</h3>
+                    <div class="streak-counter">0 days</div>
+                    <p>Keep up the good work!</p>
+                </div>
+                <div class="progress-card">
+                    <h3>Time Spent</h3>
+                    <div class="time-counter">0 hours</div>
+                    <p>Total learning time</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="floating-action-btn" aria-label="Scroll to top" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- Chat Support -->
+    <div id="chat-bubble" class="chat-bubble" aria-label="Open chat support">
+        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Support"/>
+    </div>
+
+    <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-header">
+        <div id="chat-header" class="chat-header">
+            <h2 id="chat-title">Sign Language Bot</h2>
+            <button id="close-chat" aria-label="Close chat">×</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="chat-message bot">
+                <p>Hello! I'm here to help you learn Indian Sign Language. Ask me anything about signing, lessons, or tips!</p>
+            </div>
+        </div>
+        <div id="chat-footer" class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask a question..." aria-label="Type your message">
+            <button id="chat-send" aria-label="Send message">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="learn.js"></script>
+</body>
+</html>

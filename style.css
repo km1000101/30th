@@ -74,6 +74,44 @@ body {
     color: #f39108;
     font-weight: 400;
     opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+/* Navigation Styles */
+.main-nav {
+    margin-top: 1rem;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background: rgba(123, 47, 242, 0.2);
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.nav-link:hover {
+    background: rgba(123, 47, 242, 0.4);
+    border-color: rgba(123, 47, 242, 0.6);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(123, 47, 242, 0.4);
 }
 
 /* Main Content */
@@ -899,6 +937,715 @@ canvas {
     
     .help-content {
         padding: 1.5rem;
+    }
+}
+
+/* Learn Page Styles */
+.section-title {
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Learning Categories */
+.learning-categories {
+    margin-bottom: 4rem;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.category-card {
+    background: rgba(44, 47, 84, 0.35);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(16px);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(123, 47, 242, 0.5);
+    box-shadow: 0 15px 40px rgba(123, 47, 242, 0.2);
+}
+
+.category-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.category-card h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.category-card p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.category-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.category-stats span {
+    background: rgba(123, 47, 242, 0.2);
+    color: #f39108;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.start-learning-btn {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.start-learning-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+}
+
+/* Featured Lesson */
+.featured-lesson {
+    margin-bottom: 4rem;
+}
+
+.lesson-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+}
+
+.lesson-video {
+    text-align: center;
+}
+
+.video-placeholder {
+    background: #000;
+    border-radius: 15px;
+    padding: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(123, 47, 242, 0.2);
+}
+
+.video-placeholder:hover {
+    border-color: rgba(123, 47, 242, 0.5);
+    transform: scale(1.02);
+}
+
+.play-button {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #f39108;
+}
+
+.lesson-content h3 {
+    color: #fff;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.lesson-progress {
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(123, 47, 242, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7b2ff2, #f39108);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #f39108;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.lesson-steps {
+    margin-bottom: 2rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(123, 47, 242, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+}
+
+.step-item.completed {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.4);
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.step-item.completed .step-number {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+}
+
+.step-text {
+    color: #fff;
+    font-weight: 500;
+}
+
+.start-lesson-btn {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.start-lesson-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+}
+
+/* Learning Tips */
+.learning-tips {
+    margin-bottom: 4rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.tip-card {
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(123, 47, 242, 0.4);
+    box-shadow: 0 10px 30px rgba(123, 47, 242, 0.2);
+}
+
+.tip-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.tip-card h4 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.tip-card p {
+    color: #ccc;
+    line-height: 1.5;
+}
+
+/* Progress Tracking */
+.progress-tracking {
+    margin-bottom: 4rem;
+}
+
+.progress-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.progress-card {
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+}
+
+.progress-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+}
+
+.progress-number {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.streak-counter, .time-counter {
+    color: #f39108;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.progress-card p {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design for Learn Page */
+@media (max-width: 768px) {
+    .lesson-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .progress-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Dictionary Page Styles */
+.search-section {
+    margin-bottom: 3rem;
+}
+
+.search-container {
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+}
+
+.search-box {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(123, 47, 242, 0.6);
+    box-shadow: 0 0 0 2px rgba(123, 47, 242, 0.2);
+}
+
+.search-btn {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border: none;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+}
+
+.search-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: rgba(123, 47, 242, 0.6);
+}
+
+/* Quick Categories */
+.quick-categories {
+    margin-bottom: 3rem;
+}
+
+.category-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-btn {
+    background: rgba(123, 47, 242, 0.1);
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.category-btn:hover {
+    background: rgba(123, 47, 242, 0.2);
+    border-color: rgba(123, 47, 242, 0.5);
+    transform: translateY(-2px);
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(123, 47, 242, 0.4);
+}
+
+/* Signs Section */
+.signs-section {
+    margin-bottom: 4rem;
+}
+
+.signs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.results-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: #ccc;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn {
+    background: rgba(123, 47, 242, 0.1);
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.view-btn:hover {
+    background: rgba(123, 47, 242, 0.2);
+    border-color: rgba(123, 47, 242, 0.5);
+}
+
+.view-btn.active {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border-color: transparent;
+}
+
+/* Signs Grid */
+.signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.signs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sign-card {
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 242, 0.2);
+    transition: all 0.3s ease;
+}
+
+.sign-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(123, 47, 242, 0.5);
+    box-shadow: 0 15px 40px rgba(123, 47, 242, 0.2);
+}
+
+.sign-video {
+    position: relative;
+    background: #000;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #f39108;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.sign-video:hover .play-overlay {
+    opacity: 1;
+}
+
+.sign-info {
+    padding: 1.5rem;
+}
+
+.sign-info h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.sign-description {
+    color: #ccc;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.sign-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.difficulty, .category {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.difficulty.beginner {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+.difficulty.intermediate {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FF9800;
+}
+
+.difficulty.advanced {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+}
+
+.category {
+    background: rgba(123, 47, 242, 0.2);
+    color: #f39108;
+}
+
+.learn-sign-btn {
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    width: 100%;
+}
+
+.learn-sign-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+}
+
+/* Featured Signs */
+.featured-signs {
+    margin-bottom: 4rem;
+}
+
+.featured-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.featured-sign {
+    background: rgba(44, 47, 84, 0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(123, 47, 242, 0.3);
+    transition: all 0.3s ease;
+}
+
+.featured-sign:hover {
+    transform: translateY(-5px);
+    border-color: rgba(123, 47, 242, 0.6);
+    box-shadow: 0 15px 40px rgba(123, 47, 242, 0.3);
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #ccc;
+}
+
+.no-results-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+.no-results h3 {
+    color: #f39108;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Responsive Design for Dictionary */
+@media (max-width: 768px) {
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .search-filters {
+        justify-content: center;
+    }
+    
+    .category-buttons {
+        justify-content: center;
+    }
+    
+    .signs-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .results-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .signs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-container {
+        grid-template-columns: 1fr;
     }
 }
 
