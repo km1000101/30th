@@ -142,7 +142,7 @@ async function getBotResponse(message) {
 
   // Allowed topics keywords for broader matching
   const allowedTopics = [
-    'what is sign language','why is sign laguage used', 'gesture', 'deaf', 'hard-of-hearing', 'media pipe', 
+    'sign language','what is sign language','why is sign laguage used', 'gesture', 'deaf', 'hard-of-hearing', 'media pipe', 
     'tensorflow', 'machine learning', 'project', 'technology', 'tech',
     'model', 'webcam', 'pose', 'hand tracking', 'pytorch', 'deep learning',
     'ai', 'artificial intelligence', 'computer vision', 'neural network' , 'what' , 'why not pytorch?' , 'what is tensorflow?'
