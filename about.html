@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Indian Sign Language - Sign Language Translator</title>
+    <meta name="description" content="Learn about Indian Sign Language (ISL), its history, importance, and how AI technology is making it accessible to everyone.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Background animation canvas -->
+    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
+    
+    <header class="header">
+        <div class="header-content">
+            <h1>About Indian Sign Language</h1>
+            <p class="subtitle">Understanding ISL and the Technology Behind It</p>
+            
+            <!-- Navigation Menu -->
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="learn.html" class="nav-link">Learn to Sign</a></li>
+                    <li><a href="dictionary.html" class="nav-link">Sign Dictionary</a></li>
+                    <li><a href="character.html" class="nav-link">Character Recognition</a></li>
+                    <li><a href="about.html" class="nav-link active">About ISL</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>What is Indian Sign Language?</h2>
+                <p class="hero-description">
+                    Indian Sign Language (ISL) is the primary sign language used by the deaf community in India. 
+                    It's a complete, natural language with its own grammar and syntax, distinct from spoken languages.
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="about-content-grid">
+            <!-- What is ISL Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">🤟</div>
+                    <h3>Understanding ISL</h3>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Indian Sign Language is a visual-spatial language that uses hand gestures, facial expressions, 
+                        and body movements to convey meaning. Unlike spoken languages, ISL relies on:
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>Hand Shapes:</strong> Different hand configurations represent letters, numbers, and concepts</li>
+                        <li><strong>Movement:</strong> Direction and motion of hands add meaning to signs</li>
+                        <li><strong>Location:</strong> Where signs are made relative to the body</li>
+                        <li><strong>Facial Expressions:</strong> Emotions and grammatical markers</li>
+                        <li><strong>Body Language:</strong> Posture and positioning enhance communication</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">📚</div>
+                    <h3>History & Development</h3>
+                </div>
+                <div class="section-content">
+                    <p>
+                        ISL has evolved over decades through the deaf community in India. Key milestones include:
+                    </p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">1960s</div>
+                            <div class="timeline-content">
+                                <h4>Early Development</h4>
+                                <p>Formal recognition and documentation of ISL began</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2001</div>
+                            <div class="timeline-content">
+                                <h4>Rights of Persons with Disabilities Act</h4>
+                                <p>Legal recognition of sign language as a means of communication</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2016</div>
+                            <div class="timeline-content">
+                                <h4>ISL Dictionary</h4>
+                                <p>First comprehensive ISL dictionary published by ISLRTC</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h4>Digital Revolution</h4>
+                                <p>AI-powered tools making ISL more accessible</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Importance Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">💡</div>
+                    <h3>Why ISL Matters</h3>
+                </div>
+                <div class="section-content">
+                    <div class="importance-grid">
+                        <div class="importance-card">
+                            <div class="importance-icon">🌍</div>
+                            <h4>Inclusive Communication</h4>
+                            <p>Bridges the communication gap between deaf and hearing communities</p>
+                        </div>
+                        <div class="importance-card">
+                            <div class="importance-icon">🎓</div>
+                            <h4>Education Access</h4>
+                            <p>Enables deaf students to learn and participate in educational settings</p>
+                        </div>
+                        <div class="importance-card">
+                            <div class="importance-icon">💼</div>
+                            <h4>Employment Opportunities</h4>
+                            <p>Opens doors to better job prospects and workplace integration</p>
+                        </div>
+                        <div class="importance-card">
+                            <div class="importance-icon">🏥</div>
+                            <h4>Healthcare Access</h4>
+                            <p>Ensures proper medical care through effective communication</p>
+                        </div>
+                        <div class="importance-card">
+                            <div class="importance-icon">👨‍👩‍👧‍👦</div>
+                            <h4>Family Connection</h4>
+                            <p>Strengthens family bonds and social relationships</p>
+                        </div>
+                        <div class="importance-card">
+                            <div class="importance-icon">🎭</div>
+                            <h4>Cultural Identity</h4>
+                            <p>Preserves and celebrates deaf culture and community</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">🤖</div>
+                    <h3>How Our Technology Works</h3>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Our AI-powered system uses cutting-edge technology to recognize and translate ISL in real-time:
+                    </p>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <div class="tech-icon">📹</div>
+                            <h4>Computer Vision</h4>
+                            <p>MediaPipe Holistic tracks hand landmarks and body pose</p>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🧠</div>
+                            <h4>Machine Learning</h4>
+                            <p>TensorFlow.js models trained on thousands of ISL gestures</p>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🎯</div>
+                            <h4>Real-time Processing</h4>
+                            <p>Instant recognition and translation of hand movements</p>
+                        </div>
+                        <div class="tech-item">
+                            <div class="tech-icon">🔊</div>
+                            <h4>Speech Recognition</h4>
+                            <p>Voice-to-sign translation for bidirectional communication</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">📊</div>
+                    <h3>ISL in Numbers</h3>
+                </div>
+                <div class="section-content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">18+</div>
+                            <div class="stat-label">Million Deaf People in India</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5000+</div>
+                            <div class="stat-label">ISL Signs Documented</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">22</div>
+                            <div class="stat-label">Official Languages Recognized</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Accuracy of Our AI Model</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learning Resources Section -->
+            <section class="about-section">
+                <div class="section-header">
+                    <div class="section-icon">📖</div>
+                    <h3>Learning Resources</h3>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Ready to start learning ISL? Here are some excellent resources:
+                    </p>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <h4>📚 Official ISL Dictionary</h4>
+                            <p>Comprehensive dictionary by Indian Sign Language Research and Training Centre</p>
+                            <a href="https://islrtc.nic.in/" target="_blank" class="resource-link">Visit ISLRTC</a>
+                        </div>
+                        <div class="resource-card">
+                            <h4>🎓 Online Courses</h4>
+                            <p>Structured learning programs for beginners and advanced learners</p>
+                            <a href="learn.html" class="resource-link">Start Learning</a>
+                        </div>
+                        <div class="resource-card">
+                            <h4>📱 Mobile Apps</h4>
+                            <p>Interactive apps for learning ISL on the go</p>
+                            <a href="dictionary.html" class="resource-link">Explore Dictionary</a>
+                        </div>
+                        <div class="resource-card">
+                            <h4>👥 Community Groups</h4>
+                            <p>Connect with the deaf community and ISL learners</p>
+                            <a href="#" class="resource-link">Find Groups</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="about-section cta-section">
+                <div class="section-header">
+                    <div class="section-icon">🚀</div>
+                    <h3>Ready to Get Started?</h3>
+                </div>
+                <div class="section-content">
+                    <p>
+                        Join thousands of people learning ISL and making communication more inclusive!
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="index.html" class="cta-button primary">Try Real-time Detection</a>
+                        <a href="learn.html" class="cta-button secondary">Start Learning ISL</a>
+                        <a href="dictionary.html" class="cta-button secondary">Browse Sign Dictionary</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Chat Support -->
+    <div id="chat-bubble" class="chat-bubble" aria-label="Open chat support">
+        <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Support"/>
+    </div>
+
+    <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-header">
+        <div id="chat-header" class="chat-header">
+            <h2 id="chat-title">Sign Language Bot</h2>
+            <button id="close-chat" aria-label="Close chat">×</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="chat-message bot">
+                <p>Hello! I'm your Sign Language Assistant. Ask me anything about ISL, this project, or how to get started with sign language learning!</p>
+            </div>
+        </div>
+        <div id="chat-footer" class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Ask a question..." aria-label="Type your message">
+            <button id="chat-send" aria-label="Send message">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

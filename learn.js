@@ -1,71 +1,359 @@
 // Learn Page JavaScript Functionality
 
-// Learning categories data
+// Learning categories data with actual video links and preview images
 const learningCategories = {
     greetings: {
         title: "Basic Greetings",
         lessons: [
-            { id: 1, title: "Hello & Goodbye", duration: "5 min", difficulty: "Beginner" },
-            { id: 2, title: "Good Morning/Afternoon", duration: "4 min", difficulty: "Beginner" },
-            { id: 3, title: "How are you?", duration: "6 min", difficulty: "Beginner" },
-            { id: 4, title: "Nice to meet you", duration: "5 min", difficulty: "Beginner" },
-            { id: 5, title: "Thank you & Please", duration: "4 min", difficulty: "Beginner" }
+            { 
+                id: 1, 
+                title: "Hello & Goodbye", 
+                duration: "5 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
+                description: "Learn the basic signs for greeting and saying goodbye"
+            },
+            { 
+                id: 2, 
+                title: "Good Morning/Afternoon", 
+                duration: "4 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+                description: "Time-based greetings for different parts of the day"
+            },
+            { 
+                id: 3, 
+                title: "How are you?", 
+                duration: "6 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop",
+                description: "Asking about someone's well-being and responding"
+            },
+            { 
+                id: 4, 
+                title: "Nice to meet you", 
+                duration: "5 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=300&fit=crop",
+                description: "Introduction and meeting new people"
+            },
+            { 
+                id: 5, 
+                title: "Thank you & Please", 
+                duration: "4 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=300&fit=crop",
+                description: "Essential polite expressions in sign language"
+            }
         ]
     },
     family: {
         title: "Family & People",
         lessons: [
-            { id: 1, title: "Family Members", duration: "8 min", difficulty: "Beginner" },
-            { id: 2, title: "Relationships", duration: "7 min", difficulty: "Beginner" },
-            { id: 3, title: "Personal Pronouns", duration: "6 min", difficulty: "Beginner" },
-            { id: 4, title: "Age & Numbers", duration: "5 min", difficulty: "Beginner" },
-            { id: 5, title: "Physical Descriptions", duration: "7 min", difficulty: "Beginner" },
-            { id: 6, title: "Emotions & Feelings", duration: "8 min", difficulty: "Beginner" },
-            { id: 7, title: "Occupations", duration: "9 min", difficulty: "Beginner" },
-            { id: 8, title: "Nationalities", duration: "6 min", difficulty: "Beginner" }
+            { 
+                id: 1, 
+                title: "Family Members", 
+                duration: "8 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&h=300&fit=crop",
+                description: "Signs for immediate family members"
+            },
+            { 
+                id: 2, 
+                title: "Relationships", 
+                duration: "7 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop",
+                description: "Extended family and relationship terms"
+            },
+            { 
+                id: 3, 
+                title: "Personal Pronouns", 
+                duration: "6 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+                description: "I, you, he, she, we, they in sign language"
+            },
+            { 
+                id: 4, 
+                title: "Age & Numbers", 
+                duration: "5 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+                description: "Counting and expressing age"
+            },
+            { 
+                id: 5, 
+                title: "Physical Descriptions", 
+                duration: "7 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=300&fit=crop",
+                description: "Describing people's appearance"
+            },
+            { 
+                id: 6, 
+                title: "Emotions & Feelings", 
+                duration: "8 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop",
+                description: "Expressing emotions and feelings"
+            },
+            { 
+                id: 7, 
+                title: "Occupations", 
+                duration: "9 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop",
+                description: "Common job and profession signs"
+            },
+            { 
+                id: 8, 
+                title: "Nationalities", 
+                duration: "6 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+                description: "Countries and nationalities in sign language"
+            }
         ]
     },
     food: {
         title: "Food & Dining",
         lessons: [
-            { id: 1, title: "Basic Food Items", duration: "6 min", difficulty: "Beginner" },
-            { id: 2, title: "Fruits & Vegetables", duration: "7 min", difficulty: "Beginner" },
-            { id: 3, title: "Meals & Times", duration: "5 min", difficulty: "Beginner" },
-            { id: 4, title: "Cooking & Kitchen", duration: "8 min", difficulty: "Beginner" },
-            { id: 5, title: "Restaurant Signs", duration: "9 min", difficulty: "Beginner" },
-            { id: 6, title: "Dietary Preferences", duration: "6 min", difficulty: "Beginner" }
+            { 
+                id: 1, 
+                title: "Basic Food Items", 
+                duration: "6 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1504674900244-1b47e9d6b5a3?w=400&h=300&fit=crop",
+                description: "Common food items and meals"
+            },
+            { 
+                id: 2, 
+                title: "Fruits & Vegetables", 
+                duration: "7 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1519996529931-28324d5a630e?w=400&h=300&fit=crop",
+                description: "Fresh produce and healthy foods"
+            },
+            { 
+                id: 3, 
+                title: "Meals & Times", 
+                duration: "5 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop",
+                description: "Breakfast, lunch, dinner and meal times"
+            },
+            { 
+                id: 4, 
+                title: "Cooking & Kitchen", 
+                duration: "8 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
+                description: "Kitchen utensils and cooking terms"
+            },
+            { 
+                id: 5, 
+                title: "Restaurant Signs", 
+                duration: "9 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
+                description: "Dining out and restaurant communication"
+            },
+            { 
+                id: 6, 
+                title: "Dietary Preferences", 
+                duration: "6 min", 
+                difficulty: "Beginner",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop",
+                description: "Vegetarian, vegan, and dietary restrictions"
+            }
         ]
     },
     health: {
         title: "Health & Emergency",
         lessons: [
-            { id: 1, title: "Body Parts", duration: "8 min", difficulty: "Intermediate" },
-            { id: 2, title: "Medical Terms", duration: "10 min", difficulty: "Intermediate" },
-            { id: 3, title: "Emergency Signs", duration: "7 min", difficulty: "Intermediate" },
-            { id: 4, title: "Health Questions", duration: "9 min", difficulty: "Intermediate" }
+            { 
+                id: 1, 
+                title: "Body Parts", 
+                duration: "8 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+                description: "Anatomy and body part signs"
+            },
+            { 
+                id: 2, 
+                title: "Medical Terms", 
+                duration: "10 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+                description: "Medical terminology and health conditions"
+            },
+            { 
+                id: 3, 
+                title: "Emergency Signs", 
+                duration: "7 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=300&fit=crop",
+                description: "Emergency situations and urgent communication"
+            },
+            { 
+                id: 4, 
+                title: "Health Questions", 
+                duration: "9 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
+                description: "Asking and answering health-related questions"
+            }
         ]
     },
     education: {
         title: "Education & Work",
         lessons: [
-            { id: 1, title: "School Subjects", duration: "8 min", difficulty: "Intermediate" },
-            { id: 2, title: "Classroom Signs", duration: "6 min", difficulty: "Intermediate" },
-            { id: 3, title: "Workplace Terms", duration: "9 min", difficulty: "Intermediate" },
-            { id: 4, title: "Meetings & Presentations", duration: "7 min", difficulty: "Intermediate" },
-            { id: 5, title: "Technology Terms", duration: "8 min", difficulty: "Intermediate" },
-            { id: 6, title: "Professional Skills", duration: "10 min", difficulty: "Intermediate" },
-            { id: 7, title: "Career Development", duration: "9 min", difficulty: "Intermediate" }
+            { 
+                id: 1, 
+                title: "School Subjects", 
+                duration: "8 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9e1?w=400&h=300&fit=crop",
+                description: "Academic subjects and learning areas"
+            },
+            { 
+                id: 2, 
+                title: "Classroom Signs", 
+                duration: "6 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
+                description: "Classroom communication and instructions"
+            },
+            { 
+                id: 3, 
+                title: "Workplace Terms", 
+                duration: "9 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=300&fit=crop",
+                description: "Professional and workplace vocabulary"
+            },
+            { 
+                id: 4, 
+                title: "Meetings & Presentations", 
+                duration: "7 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=300&fit=crop",
+                description: "Business meetings and presentation skills"
+            },
+            { 
+                id: 5, 
+                title: "Technology Terms", 
+                duration: "8 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop",
+                description: "Digital and technology-related signs"
+            },
+            { 
+                id: 6, 
+                title: "Professional Skills", 
+                duration: "10 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+                description: "Skills and competencies in the workplace"
+            },
+            { 
+                id: 7, 
+                title: "Career Development", 
+                duration: "9 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+                description: "Career growth and professional development"
+            }
         ]
     },
     travel: {
         title: "Travel & Places",
         lessons: [
-            { id: 1, title: "Transportation", duration: "7 min", difficulty: "Intermediate" },
-            { id: 2, title: "Directions & Location", duration: "8 min", difficulty: "Intermediate" },
-            { id: 3, title: "Countries & Cities", duration: "9 min", difficulty: "Intermediate" },
-            { id: 4, title: "Tourist Activities", duration: "6 min", difficulty: "Intermediate" },
-            { id: 5, title: "Accommodation", duration: "7 min", difficulty: "Intermediate" },
-            { id: 6, title: "Cultural Signs", duration: "8 min", difficulty: "Intermediate" }
+            { 
+                id: 1, 
+                title: "Transportation", 
+                duration: "7 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+                description: "Different modes of transportation"
+            },
+            { 
+                id: 2, 
+                title: "Directions & Location", 
+                duration: "8 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
+                description: "Giving and following directions"
+            },
+            { 
+                id: 3, 
+                title: "Countries & Cities", 
+                duration: "9 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+                description: "Geographic locations and place names"
+            },
+            { 
+                id: 4, 
+                title: "Tourist Activities", 
+                duration: "6 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1527631746610-bca00a040d63?w=400&h=300&fit=crop",
+                description: "Sightseeing and tourist activities"
+            },
+            { 
+                id: 5, 
+                title: "Accommodation", 
+                duration: "7 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+                description: "Hotels, booking, and accommodation terms"
+            },
+            { 
+                id: 6, 
+                title: "Cultural Signs", 
+                duration: "8 min", 
+                difficulty: "Intermediate",
+                videoUrl: "https://drive.google.com/file/d/1U-Pr4r1-cupgNOOq9NH_uTsQnPSVEKco/view?usp=sharing",
+                previewImage: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=300&fit=crop",
+                description: "Cultural events and traditions"
+            }
         ]
     }
 };
@@ -112,11 +400,18 @@ function showCategoryModal(category) {
                 <button class="close-modal" onclick="this.closest('.category-modal').remove()">×</button>
             </div>
             <div class="modal-body">
-                <div class="lessons-list">
+                <div class="lessons-grid">
                     ${category.lessons.map(lesson => `
-                        <div class="lesson-item ${isLessonCompleted(category.title, lesson.id) ? 'completed' : ''}">
+                        <div class="lesson-card ${isLessonCompleted(category.title, lesson.id) ? 'completed' : ''}">
+                            <div class="lesson-preview">
+                                <img src="${lesson.previewImage}" alt="${lesson.title}" class="lesson-thumbnail">
+                                <div class="lesson-overlay">
+                                    <div class="play-icon">▶️</div>
+                                </div>
+                            </div>
                             <div class="lesson-info">
                                 <h4>${lesson.title}</h4>
+                                <p class="lesson-description">${lesson.description}</p>
                                 <div class="lesson-meta">
                                     <span class="duration">${lesson.duration}</span>
                                     <span class="difficulty">${lesson.difficulty}</span>
@@ -182,24 +477,77 @@ function showCategoryModal(category) {
             .close-modal:hover {
                 background-color: rgba(123, 47, 242, 0.3);
             }
-            .lesson-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem;
-                margin-bottom: 1rem;
+            .lessons-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                padding: 1rem 0;
+            }
+            .lesson-card {
                 background: rgba(123, 47, 242, 0.1);
                 border-radius: 15px;
                 border: 1px solid rgba(123, 47, 242, 0.2);
                 transition: all 0.3s ease;
+                overflow: hidden;
             }
-            .lesson-item:hover {
+            .lesson-card:hover {
                 background: rgba(123, 47, 242, 0.2);
                 border-color: rgba(123, 47, 242, 0.4);
+                transform: translateY(-5px);
             }
-            .lesson-item.completed {
+            .lesson-card.completed {
                 background: rgba(76, 175, 80, 0.2);
                 border-color: rgba(76, 175, 80, 0.4);
+            }
+            .lesson-preview {
+                position: relative;
+                height: 200px;
+                overflow: hidden;
+            }
+            .lesson-thumbnail {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .lesson-card:hover .lesson-thumbnail {
+                transform: scale(1.05);
+            }
+            .lesson-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .lesson-card:hover .lesson-overlay {
+                opacity: 1;
+            }
+            .play-icon {
+                font-size: 2rem;
+                color: white;
+                background: rgba(123, 47, 242, 0.8);
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .lesson-info {
+                padding: 1rem;
+            }
+            .lesson-description {
+                color: #ccc;
+                font-size: 0.9rem;
+                margin: 0.5rem 0;
+                line-height: 1.4;
             }
             .lesson-meta {
                 display: flex;
@@ -254,6 +602,21 @@ function startLesson(categoryTitle = null, lessonId = null) {
 
 // Show lesson interface
 function showLessonInterface(categoryTitle, lessonId) {
+    // Find the lesson data
+    let lesson = null;
+    for (const categoryKey in learningCategories) {
+        const category = learningCategories[categoryKey];
+        if (category.title === categoryTitle) {
+            lesson = category.lessons.find(l => l.id === lessonId);
+            break;
+        }
+    }
+    
+    if (!lesson) {
+        console.error('Lesson not found');
+        return;
+    }
+    
     // Create lesson interface modal
     const modal = document.createElement('div');
     modal.className = 'lesson-modal';
@@ -266,9 +629,21 @@ function showLessonInterface(categoryTitle, lessonId) {
             <div class="lesson-modal-body">
                 <div class="lesson-video-section">
                     <div class="video-player">
-                        <div class="video-placeholder-large">
-                            <div class="play-button-large">▶️</div>
-                            <p>Lesson video will appear here</p>
+                        <iframe 
+                            src="${lesson.videoUrl.replace('/view?usp=sharing', '/preview')}" 
+                            width="100%" 
+                            height="400" 
+                            frameborder="0" 
+                            allowfullscreen
+                            class="lesson-video">
+                        </iframe>
+                    </div>
+                    <div class="lesson-details">
+                        <h3>${lesson.title}</h3>
+                        <p class="lesson-description">${lesson.description}</p>
+                        <div class="lesson-meta">
+                            <span class="duration">${lesson.duration}</span>
+                            <span class="difficulty">${lesson.difficulty}</span>
                         </div>
                     </div>
                 </div>
@@ -338,22 +713,31 @@ function showLessonInterface(categoryTitle, lessonId) {
             }
             .video-player {
                 width: 100%;
-                height: 300px;
+                height: 400px;
                 background: #000;
                 border-radius: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
                 margin-bottom: 1.5rem;
+                overflow: hidden;
             }
-            .video-placeholder-large {
-                text-align: center;
+            .lesson-video {
+                width: 100%;
+                height: 100%;
+                border-radius: 15px;
+            }
+            .lesson-details {
+                margin-bottom: 1.5rem;
+                padding: 1rem;
+                background: rgba(123, 47, 242, 0.1);
+                border-radius: 15px;
+                border: 1px solid rgba(123, 47, 242, 0.2);
+            }
+            .lesson-details h3 {
+                margin: 0 0 0.5rem 0;
                 color: #fff;
             }
-            .play-button-large {
-                font-size: 3rem;
+            .lesson-details .lesson-description {
+                color: #ccc;
                 margin-bottom: 1rem;
-                cursor: pointer;
             }
             .lesson-controls {
                 display: flex;
