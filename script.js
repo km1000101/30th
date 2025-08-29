@@ -8,6 +8,30 @@ let sequence = [];
 const SEQUENCE_LENGTH = 30;
 const actions = ['i love you', 'thank you', 'hello']; // The actions your model can predict
 
+// Add these configurations at the top of your file
+const holisticConfig = {
+    locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
+    }
+};
+
+const modelConfig = {
+    maxHands: 1,
+    complexity: 'lite',
+    smoothLandmarks: true,
+    minDetectionConfidence: 0.7,
+    minTrackingConfidence: 0.5
+};
+
+// Update your video constraints
+const constraints = {
+    video: {
+        width: 640,
+        height: 480,
+        frameRate: { ideal: 30 }
+    }
+};
+
 // Function to extract keypoints from MediaPipe results
 function extractKeypoints(results) {
     const pose = results.poseLandmarks ? results.poseLandmarks.map(res => [res.x, res.y, res.z, res.visibility]).flat() : new Array(33 * 4).fill(0);
@@ -61,16 +85,9 @@ async function main() {
     console.log('Model loaded.');
 
     // Initialize MediaPipe Holistic
-    const holistic = new Holistic({
-        locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
-        }
-    });
+    const holistic = new Holistic(holisticConfig);
 
-    holistic.setOptions({
-        minDetectionConfidence: 0.5,
-        minTrackingConfidence: 0.5
-    });
+    holistic.setOptions(modelConfig);
 
     holistic.onResults(onResults);
 
@@ -199,3 +216,20 @@ async function getBotResponse(message) {
     return "Sorry, there was an error connecting to Gemini API.";
   }
 }
+
+// Add requestAnimationFrame for smoother rendering
+let lastDrawTime = 0;
+const fps = 30;
+const fpsInterval = 1000 / fps;
+
+function animate(currentTime) {
+    requestAnimationFrame(animate);
+    
+    const elapsed = currentTime - lastDrawTime;
+    if (elapsed > fpsInterval) {
+        lastDrawTime = currentTime - (elapsed % fpsInterval);
+        // Your existing drawing code here
+    }
+}
+
+requestAnimationFrame(animate);
