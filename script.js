@@ -1,3 +1,87 @@
+// --- Integrated Node Animation Background ---
+(function createNodeBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'node-bg-canvas';
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw';
+    canvas.style.height = '100vh';
+    canvas.style.zIndex = '-1';
+    canvas.style.pointerEvents = 'none';
+    document.body.prepend(canvas);
+    const ctx = canvas.getContext('2d');
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    window.addEventListener('resize', () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    });
+
+    const NODES = 60;
+    const nodes = [];
+    for (let i = 0; i < NODES; i++) {
+        nodes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.7,
+            vy: (Math.random() - 0.5) * 0.7
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, width, height);
+        // Draw lines
+        for (let i = 0; i < NODES; i++) {
+            for (let j = i + 1; j < NODES; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 140) {
+                    ctx.strokeStyle = 'rgba(123,47,242,' + (1 - dist / 140) + ')';
+                    ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        // Draw nodes
+        for (let i = 0; i < NODES; i++) {
+            ctx.beginPath();
+            ctx.arc(nodes[i].x, nodes[i].y, 3, 0, 2 * Math.PI);
+            ctx.fillStyle = '#fff';
+            ctx.shadowColor = '#7b2ff2';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    function update() {
+        for (let i = 0; i < NODES; i++) {
+            nodes[i].x += nodes[i].vx;
+            nodes[i].y += nodes[i].vy;
+            if (nodes[i].x < 0 || nodes[i].x > width) nodes[i].vx *= -1;
+            if (nodes[i].y < 0 || nodes[i].y > height) nodes[i].vy *= -1;
+        }
+    }
+
+    function animate() {
+        update();
+        draw();
+        requestAnimationFrame(animate);
+    }
+    animate();
+})();
+
 const videoElement = document.getElementById('video');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
@@ -217,19 +301,4 @@ async function getBotResponse(message) {
   }
 }
 
-// Add requestAnimationFrame for smoother rendering
-let lastDrawTime = 0;
-const fps = 30;
-const fpsInterval = 1000 / fps;
 
-function animate(currentTime) {
-    requestAnimationFrame(animate);
-    
-    const elapsed = currentTime - lastDrawTime;
-    if (elapsed > fpsInterval) {
-        lastDrawTime = currentTime - (elapsed % fpsInterval);
-        // Your existing drawing code here
-    }
-}
-
-requestAnimationFrame(animate);

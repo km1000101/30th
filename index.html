@@ -1,3 +1,4 @@
+    <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,13 +13,32 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Background animation removed -->
     <header class="header">
-        <h1>Sign Language to Text</h1>
+        <h1></h1>
     </header>
-    <div class="container">
-        <video id="video" style="display: none;"></video>
-        <canvas id="canvas" width="640px" height="480px"></canvas>
-        <div id="output"></div>
+
+    <div class="main-flex-row">
+        <div class="container">
+            <video id="video" style="display: none;"></video>
+        <canvas id="canvas" width="700px" height="500px"></canvas>
+            <div id="output"></div>
+        </div>
+        <aside class="tutorial-panel">
+            <div class="tutorial-title">Try these Signs</div>
+            <div class="tutorial-section">
+                <h3>Hello</h3>
+                <img src="ISL_Gifs/hello.gif" alt="Hello sign" class="tutorial-gif">
+            </div>
+            <div class="tutorial-section">
+                <h3>Thank You</h3>
+                <img src="ISL_Gifs/thank you.gif" alt="Thank you sign" class="tutorial-gif">
+            </div>
+            <div class="tutorial-section">
+                <h3>I Love You</h3>
+                <img src="ISL_Gifs/i love you.gif" alt="I love you sign" class="tutorial-gif">
+            </div>
+        </aside>
     </div>
 
     <div id="chat-bubble">
