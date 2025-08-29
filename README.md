@@ -1,5 +1,5 @@
 # Sign Language to Text Translator
-
+hgyidgosuhfyvdhkv
 ## Overview
 This project is a real-time Indian Sign Language (ISL) to text translator that uses machine learning and computer vision to bridge communication gaps between the deaf/hard of hearing community and others. It leverages TensorFlow.js and MediaPipe for accurate hand gesture recognition and translation.
 
