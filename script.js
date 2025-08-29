@@ -105,27 +105,25 @@ closeChat.addEventListener('click', () => {
     chatBubble.style.display = 'flex';
 });
 
-chatSend.addEventListener('click', () => {
-    sendMessage();
+chatSend.addEventListener('click', async () => {
+    await sendMessage();
 });
 
-chatInput.addEventListener('keypress', (e) => {
+chatInput.addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
-        sendMessage();
+        await sendMessage();
     }
 });
 
-function sendMessage() {
+async function sendMessage() {
     const userMessage = chatInput.value.trim();
     if (userMessage === '') return;
 
     appendMessage(userMessage, 'user');
     chatInput.value = '';
 
-    setTimeout(() => {
-        const botResponse = getBotResponse(userMessage);
-        appendMessage(botResponse, 'bot');
-    }, 500);
+    const botResponse = await getBotResponse(userMessage);
+    appendMessage(botResponse, 'bot');
 }
 
 function appendMessage(message, sender) {
@@ -138,37 +136,66 @@ function appendMessage(message, sender) {
     chatBody.scrollTop = chatBody.scrollHeight;
 }
 
-function getBotResponse(message) {
-    const lowerCaseMessage = message.toLowerCase();
+async function getBotResponse(message) {
+  const apiKey = 'AIzaSyCDbO3317S6nblaTpbcAa6iLzfqAf6YaQ8'; // Replace with your actual Gemini API key
+  const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey;
 
-    if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
-        return "Hello there! How can I help you today?";
-    }
+  // Allowed topics keywords for broader matching
+  const allowedTopics = [
+    'what is sign language','why is sign laguage used', 'gesture', 'deaf', 'hard-of-hearing', 'media pipe', 
+    'tensorflow', 'machine learning', 'project', 'technology', 'tech',
+    'model', 'webcam', 'pose', 'hand tracking', 'pytorch', 'deep learning',
+    'ai', 'artificial intelligence', 'computer vision', 'neural network' , 'what' , 'why not pytorch?' , 'what is tensorflow?'
+  ];
 
-    if (lowerCaseMessage.includes('how does this work') || lowerCaseMessage.includes('how it works')) {
-        return "This website uses your webcam to capture video. A machine learning model called MediaPipe Holistic tracks your body and hand movements. This data is then fed into a custom TensorFlow.js model that recognizes specific sign language gestures and displays the meaning!";
-    }
+  const lowerCaseMessage = message.toLowerCase();
 
-    if (lowerCaseMessage.includes('technology') || lowerCaseMessage.includes('tech')) {
-        return "I'm built with HTML, CSS, and JavaScript. The core technologies are TensorFlow.js for the machine learning model and MediaPipe for real-time hand and pose tracking in the browser.";
-    }
+  // Check if message contains ANY allowed topic word as substring
+  const isAllowed = allowedTopics.some(topic => lowerCaseMessage.includes(topic));
+  
+  if (!isAllowed) {
+    return "Sorry, I can only answer questions about sign language or the technology used in this project.";
+  }
 
-    if (lowerCaseMessage.includes('what is this project') || lowerCaseMessage.includes('about this project')) {
-        return "This is a real-time sign language detection project. It aims to translate sign language gestures into text, making communication more accessible.";
-    }
 
-    if (lowerCaseMessage.includes('sign language')) {
-        return "Sign language is a visual language that uses hand shapes, facial expressions, and body movements to convey meaning. It's the primary language for many deaf and hard-of-hearing people.";
-    }
-    
-    if (lowerCaseMessage.includes('who are you') || lowerCaseMessage.includes('what are you')) {
-        return "I'm a friendly bot created to answer your questions about this sign language detection project. I'm here to help you understand how it works and learn more about sign language!";
-    }
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: `Answer only about sign language or the technology used in this sign language detection project. Stay on topic. Question: "${message}"`
+          }]
+        }]
+      })
+    });
+    const data = await response.json();
 
-    if (lowerCaseMessage.includes('thank you') || lowerCaseMessage.includes('thanks')) {
-        return "You're welcome! I'm happy to help. Do you have any other questions?";
-    }
+    console.log(data);
+    if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+      let responseText = data.candidates[0].content.parts[0].text;
 
-    return "I'm sorry, I don't have an answer for that right now. You can try asking about how the project works, the technology used, or general questions about sign language.";
+      // Replace markdown headers with bold text
+      responseText = responseText.replace(/^#+\s*(.*)$/gm, (_, title) => `\n${title}\n`);
+      // Replace markdown bold (**text**) with just text
+      responseText = responseText.replace(/\*\*(.*?)\*\*/g, '$1');
+      // Replace markdown italics (*text*) with just text
+      responseText = responseText.replace(/\*(.*?)\*/g, '$1');
+      // Replace markdown lists with simple bullet points
+      responseText = responseText.replace(/^\s*[-*]\s+/gm, '• ');
+      // Remove code block markers
+      responseText = responseText.replace(/```[\s\S]*?```/g, '');
+      // Remove horizontal rules
+      responseText = responseText.replace(/^---$/gm, '');
+
+      // Trim extra newlines
+      responseText = responseText.replace(/\n{3,}/g, '\n\n').trim();
+      return responseText;
+    } else {
+      return "Sorry, I couldn't get an answer from Gemini API.";
+    }
+  } catch (error) {
+    return "Sorry, there was an error connecting to Gemini API.";
+  }
 }
-
