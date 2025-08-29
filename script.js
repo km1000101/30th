@@ -162,7 +162,7 @@ function initSpeechRecognition() {
 function findMatchingGif(speech) {
     const speechWords = speech.split(' ');
     
-    // Define keyword mappings for each GIF
+    // Define keyword mappings for each GIF - expanded to include more ISL_Gifs
     const gifMappings = {
         'hello': {
             keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'],
@@ -178,6 +178,471 @@ function findMatchingGif(speech) {
             keywords: ['i love you', 'love you', 'love', 'heart', 'care', 'affection'],
             gifPath: 'ISL_Gifs/i love you.gif',
             description: 'I love you sign'
+        },
+        'how are you': {
+            keywords: ['how are you', 'how you doing', 'how do you feel', 'are you ok', 'are you okay'],
+            gifPath: 'ISL_Gifs/how are you.gif',
+            description: 'How are you sign'
+        },
+        'good morning': {
+            keywords: ['good morning', 'morning', 'rise and shine', 'early'],
+            gifPath: 'ISL_Gifs/good morning.gif',
+            description: 'Good morning sign'
+        },
+        'good afternoon': {
+            keywords: ['good afternoon', 'afternoon', 'midday'],
+            gifPath: 'ISL_Gifs/good afternoon.gif',
+            description: 'Good afternoon sign'
+        },
+        'what is your name': {
+            keywords: ['what is your name', 'your name', 'name', 'who are you', 'identify yourself'],
+            gifPath: 'ISL_Gifs/what is your name.gif',
+            description: 'What is your name sign'
+        },
+        'my name is': {
+            keywords: ['my name is', 'i am', 'call me', 'i\'m called'],
+            gifPath: 'ISL_Gifs/my name is john.gif',
+            description: 'My name is sign'
+        },
+        'nice to meet you': {
+            keywords: ['nice to meet you', 'pleasure to meet you', 'glad to meet you', 'good to see you'],
+            gifPath: 'ISL_Gifs/nice to meet you.gif',
+            description: 'Nice to meet you sign'
+        },
+        'please wait for sometime': {
+            keywords: ['please wait', 'wait', 'hold on', 'give me a moment', 'wait for sometime'],
+            gifPath: 'ISL_Gifs/please wait for sometime.gif',
+            description: 'Please wait sign'
+        },
+        'what are you doing': {
+            keywords: ['what are you doing', 'what you doing', 'what\'s up', 'whats up', 'what\'s happening'],
+            gifPath: 'ISL_Gifs/what are you doing.gif',
+            description: 'What are you doing sign'
+        },
+        'are you busy': {
+            keywords: ['are you busy', 'busy', 'occupied', 'do you have time', 'free'],
+            gifPath: 'ISL_Gifs/are you busy.gif',
+            description: 'Are you busy sign'
+        },
+        'i am fine': {
+            keywords: ['i am fine', 'i\'m fine', 'fine', 'good', 'okay', 'alright', 'well'],
+            gifPath: 'ISL_Gifs/i am fine.gif',
+            description: 'I am fine sign'
+        },
+        'i am sorry': {
+            keywords: ['i am sorry', 'i\'m sorry', 'sorry', 'apologize', 'excuse me', 'pardon'],
+            gifPath: 'ISL_Gifs/i am sorry.gif',
+            description: 'I am sorry sign'
+        },
+        'i am thinking': {
+            keywords: ['i am thinking', 'i\'m thinking', 'thinking', 'thought', 'considering', 'pondering'],
+            gifPath: 'ISL_Gifs/i am thinking.gif',
+            description: 'I am thinking sign'
+        },
+        'i am tired': {
+            keywords: ['i am tired', 'i\'m tired', 'tired', 'exhausted', 'sleepy', 'fatigued'],
+            gifPath: 'ISL_Gifs/i am tired.gif',
+            description: 'I am tired sign'
+        },
+        'i am a clerk': {
+            keywords: ['i am a clerk', 'i\'m a clerk', 'clerk', 'office worker', 'administrative', 'job'],
+            gifPath: 'ISL_Gifs/i am a clerk.gif',
+            description: 'I am a clerk sign'
+        },
+        'i go to a theatre': {
+            keywords: ['i go to a theatre', 'theatre', 'movie', 'cinema', 'entertainment', 'show'],
+            gifPath: 'ISL_Gifs/i go to a theatre.gif',
+            description: 'I go to a theatre sign'
+        },
+        'i love to shop': {
+            keywords: ['i love to shop', 'shopping', 'buy', 'retail', 'mall', 'store'],
+            gifPath: 'ISL_Gifs/i love to shop.gif',
+            description: 'I love to shop sign'
+        },
+        'i like pink colour': {
+            keywords: ['i like pink colour', 'pink', 'color', 'colour', 'favorite color', 'prefer pink'],
+            gifPath: 'ISL_Gifs/i like pink colour.gif',
+            description: 'I like pink colour sign'
+        },
+        'i had to say something but I forgot': {
+            keywords: ['i forgot', 'forgot', 'memory', 'remember', 'remind me', 'lost my thought'],
+            gifPath: 'ISL_Gifs/i had to say something but I forgot.gif',
+            description: 'I forgot what I was going to say sign'
+        },
+        'lets go for lunch': {
+            keywords: ['lets go for lunch', 'lunch', 'eat', 'meal', 'food', 'dining', 'restaurant'],
+            gifPath: 'ISL_Gifs/lets go for lunch.gif',
+            description: 'Let\'s go for lunch sign'
+        },
+        'shall I help you': {
+            keywords: ['shall I help you', 'help you', 'assist', 'support', 'aid', 'can I help'],
+            gifPath: 'ISL_Gifs/shall I help you.gif',
+            description: 'Shall I help you sign'
+        },
+        'shall we go together tommorow': {
+            keywords: ['shall we go together', 'tomorrow', 'tommorow', 'together', 'accompany', 'join'],
+            gifPath: 'ISL_Gifs/shall we go together tommorow.gif',
+            description: 'Shall we go together tomorrow sign'
+        },
+        'open the door': {
+            keywords: ['open the door', 'door', 'open', 'entrance', 'exit', 'gate'],
+            gifPath: 'ISL_Gifs/open the door.gif',
+            description: 'Open the door sign'
+        },
+        'please call me later': {
+            keywords: ['please call me later', 'call me later', 'call back', 'phone later', 'contact later'],
+            gifPath: 'ISL_Gifs/please call me later.gif',
+            description: 'Please call me later sign'
+        },
+        'sit down': {
+            keywords: ['sit down', 'sit', 'seat', 'chair', 'rest', 'take a seat'],
+            gifPath: 'ISL_Gifs/sit down.gif',
+            description: 'Sit down sign'
+        },
+        'stand up': {
+            keywords: ['stand up', 'stand', 'rise', 'get up', 'upright', 'on your feet'],
+            gifPath: 'ISL_Gifs/stand up.gif',
+            description: 'Stand up sign'
+        },
+        'take care': {
+            keywords: ['take care', 'care', 'be careful', 'look after yourself', 'stay safe', 'goodbye'],
+            gifPath: 'ISL_Gifs/take care.gif',
+            description: 'Take care sign'
+        },
+        'what is the problem': {
+            keywords: ['what is the problem', 'problem', 'issue', 'trouble', 'what\'s wrong', 'difficulty'],
+            gifPath: 'ISL_Gifs/what is the problem.gif',
+            description: 'What is the problem sign'
+        },
+        'what is today\'s date': {
+            keywords: ['what is today\'s date', 'date', 'today', 'day', 'calendar', 'what day is it'],
+            gifPath: 'ISL_Gifs/what is today\'s date.gif',
+            description: 'What is today\'s date sign'
+        },
+        'what is your father do': {
+            keywords: ['what is your father do', 'father', 'dad', 'parent', 'occupation', 'job'],
+            gifPath: 'ISL_Gifs/what is your father do.gif',
+            description: 'What does your father do sign'
+        },
+        'what is your mobile number': {
+            keywords: ['what is your mobile number', 'mobile number', 'phone number', 'contact number', 'cell'],
+            gifPath: 'ISL_Gifs/what is your mobile number.gif',
+            description: 'What is your mobile number sign'
+        },
+        'where is the bathroom': {
+            keywords: ['where is the bathroom', 'bathroom', 'toilet', 'restroom', 'washroom', 'wc'],
+            gifPath: 'ISL_Gifs/where is the bathroom.gif',
+            description: 'Where is the bathroom sign'
+        },
+        'where is the police station': {
+            keywords: ['where is the police station', 'police station', 'police', 'station', 'law enforcement'],
+            gifPath: 'ISL_Gifs/where is the police station.gif',
+            description: 'Where is the police station sign'
+        },
+        'you are wrong': {
+            keywords: ['you are wrong', 'wrong', 'incorrect', 'mistake', 'error', 'not right'],
+            gifPath: 'ISL_Gifs/you are wrong.gif',
+            description: 'You are wrong sign'
+        },
+        'dont worry': {
+            keywords: ['dont worry', 'don\'t worry', 'worry', 'anxious', 'concerned', 'relax'],
+            gifPath: 'ISL_Gifs/dont worry.gif',
+            description: 'Don\'t worry sign'
+        },
+        'be careful': {
+            keywords: ['be careful', 'careful', 'caution', 'watch out', 'attention', 'mindful'],
+            gifPath: 'ISL_Gifs/be careful.gif',
+            description: 'Be careful sign'
+        },
+        'any questions': {
+            keywords: ['any questions', 'questions', 'ask', 'inquiry', 'doubt', 'clarification'],
+            gifPath: 'ISL_Gifs/any questions.gif',
+            description: 'Any questions sign'
+        },
+        'are you angry': {
+            keywords: ['are you angry', 'angry', 'mad', 'upset', 'furious', 'irritated'],
+            gifPath: 'ISL_Gifs/are you angry.gif',
+            description: 'Are you angry sign'
+        },
+        'are you hungry': {
+            keywords: ['are you hungry', 'hungry', 'starving', 'food', 'eat', 'appetite'],
+            gifPath: 'ISL_Gifs/are you hungry.gif',
+            description: 'Are you hungry sign'
+        },
+        'are you ok': {
+            keywords: ['are you ok', 'are you okay', 'okay', 'ok', 'alright', 'fine'],
+            gifPath: 'ISL_Gifs/are you ok.gif',
+            description: 'Are you ok sign'
+        },
+        'are you okay': {
+            keywords: ['are you okay', 'are you ok', 'okay', 'ok', 'alright', 'fine'],
+            gifPath: 'ISL_Gifs/are you okay.gif',
+            description: 'Are you okay sign'
+        },
+        'did you finish homework': {
+            keywords: ['did you finish homework', 'homework', 'assignment', 'complete', 'finish', 'study'],
+            gifPath: 'ISL_Gifs/did you finish homework.gif',
+            description: 'Did you finish homework sign'
+        },
+        'do not know': {
+            keywords: ['do not know', 'don\'t know', 'unknown', 'unsure', 'uncertain', 'no idea'],
+            gifPath: 'ISL_Gifs/do not know.gif',
+            description: 'Do not know sign'
+        },
+        'do you have money': {
+            keywords: ['do you have money', 'money', 'cash', 'funds', 'currency', 'wealth'],
+            gifPath: 'ISL_Gifs/do you have money.gif',
+            description: 'Do you have money sign'
+        },
+        'do you want something to drink': {
+            keywords: ['do you want something to drink', 'drink', 'beverage', 'thirsty', 'water', 'juice'],
+            gifPath: 'ISL_Gifs/do you want something to drink.gif',
+            description: 'Do you want something to drink sign'
+        },
+        'do you watch TV': {
+            keywords: ['do you watch TV', 'TV', 'television', 'watch', 'program', 'show'],
+            gifPath: 'ISL_Gifs/do you watch TV.gif',
+            description: 'Do you watch TV sign'
+        },
+        'flower is beautiful': {
+            keywords: ['flower is beautiful', 'flower', 'beautiful', 'pretty', 'bloom', 'nature'],
+            gifPath: 'ISL_Gifs/flower is beautiful.gif',
+            description: 'Flower is beautiful sign'
+        },
+        'good question': {
+            keywords: ['good question', 'question', 'inquiry', 'ask', 'curious', 'wonder'],
+            gifPath: 'ISL_Gifs/good question.gif',
+            description: 'Good question sign'
+        },
+        'grapes': {
+            keywords: ['grapes', 'fruit', 'grape', 'vine', 'wine', 'purple'],
+            gifPath: 'ISL_Gifs/grapes.gif',
+            description: 'Grapes sign'
+        },
+        'hindu': {
+            keywords: ['hindu', 'religion', 'faith', 'belief', 'spiritual', 'temple'],
+            gifPath: 'ISL_Gifs/hindu.gif',
+            description: 'Hindu sign'
+        },
+        'hyderabad': {
+            keywords: ['hyderabad', 'city', 'place', 'location', 'india', 'telangana'],
+            gifPath: 'ISL_Gifs/hyderabad.gif',
+            description: 'Hyderabad sign'
+        },
+        'job': {
+            keywords: ['job', 'work', 'employment', 'career', 'profession', 'occupation'],
+            gifPath: 'ISL_Gifs/job.gif',
+            description: 'Job sign'
+        },
+        'july': {
+            keywords: ['july', 'month', 'summer', 'jul', '7th month', 'vacation'],
+            gifPath: 'ISL_Gifs/july.gif',
+            description: 'July sign'
+        },
+        'june': {
+            keywords: ['june', 'month', 'summer', 'jun', '6th month', 'vacation'],
+            gifPath: 'ISL_Gifs/june.gif',
+            description: 'June sign'
+        },
+        'karnataka': {
+            keywords: ['karnataka', 'state', 'india', 'bangalore', 'bengaluru', 'south india'],
+            gifPath: 'ISL_Gifs/karnataka.gif',
+            description: 'Karnataka sign'
+        },
+        'kerala': {
+            keywords: ['kerala', 'state', 'india', 'god\'s own country', 'south india', 'coastal'],
+            gifPath: 'ISL_Gifs/kerala.gif',
+            description: 'Kerala sign'
+        },
+        'krishna': {
+            keywords: ['krishna', 'god', 'deity', 'hindu', 'divine', 'spiritual'],
+            gifPath: 'ISL_Gifs/krishna.gif',
+            description: 'Krishna sign'
+        },
+        'love you': {
+            keywords: ['love you', 'love', 'affection', 'care', 'heart', 'romance'],
+            gifPath: 'ISL_Gifs/love you.gif',
+            description: 'Love you sign'
+        },
+        'mango': {
+            keywords: ['mango', 'fruit', 'summer', 'tropical', 'sweet', 'yellow'],
+            gifPath: 'ISL_Gifs/mango.gif',
+            description: 'Mango sign'
+        },
+        'may': {
+            keywords: ['may', 'month', 'spring', '5th month', 'flowers', 'bloom'],
+            gifPath: 'ISL_Gifs/may.gif',
+            description: 'May sign'
+        },
+        'mile': {
+            keywords: ['mile', 'distance', 'measurement', 'unit', 'length', 'road'],
+            gifPath: 'ISL_Gifs/mile.gif',
+            description: 'Mile sign'
+        },
+        'mumbai': {
+            keywords: ['mumbai', 'city', 'bombay', 'maharashtra', 'india', 'financial capital'],
+            gifPath: 'ISL_Gifs/mumbai.gif',
+            description: 'Mumbai sign'
+        },
+        'nagpur': {
+            keywords: ['nagpur', 'city', 'maharashtra', 'india', 'orange city', 'central india'],
+            gifPath: 'ISL_Gifs/nagpur.gif',
+            description: 'Nagpur sign'
+        },
+        'police station': {
+            keywords: ['police station', 'police', 'station', 'law enforcement', 'security', 'help'],
+            gifPath: 'ISL_Gifs/police station.gif',
+            description: 'Police station sign'
+        },
+        'post office': {
+            keywords: ['post office', 'post', 'mail', 'letter', 'package', 'communication'],
+            gifPath: 'ISL_Gifs/post office.gif',
+            description: 'Post office sign'
+        },
+        'pune': {
+            keywords: ['pune', 'city', 'maharashtra', 'india', 'oxford of the east', 'cultural'],
+            gifPath: 'ISL_Gifs/pune.gif',
+            description: 'Pune sign'
+        },
+        'punjab': {
+            keywords: ['punjab', 'state', 'india', 'land of five rivers', 'north india', 'agricultural'],
+            gifPath: 'ISL_Gifs/punjab.gif',
+            description: 'Punjab sign'
+        },
+        'saturday': {
+            keywords: ['saturday', 'saturday', 'weekend', '6th day', 'sat', 'free time'],
+            gifPath: 'ISL_Gifs/saturday.gif',
+            description: 'Saturday sign'
+        },
+        'shop': {
+            keywords: ['shop', 'store', 'buy', 'retail', 'purchase', 'market'],
+            gifPath: 'ISL_Gifs/shop.gif',
+            description: 'Shop sign'
+        },
+        'sign language interpreter': {
+            keywords: ['sign language interpreter', 'interpreter', 'translator', 'sign language', 'communication', 'deaf'],
+            gifPath: 'ISL_Gifs/sign language interpreter.gif',
+            description: 'Sign language interpreter sign'
+        },
+        'temple': {
+            keywords: ['temple', 'worship', 'prayer', 'religious', 'sacred', 'spiritual'],
+            gifPath: 'ISL_Gifs/temple.gif',
+            description: 'Temple sign'
+        },
+        'there was traffic jam': {
+            keywords: ['there was traffic jam', 'traffic jam', 'traffic', 'congestion', 'stuck', 'delay'],
+            gifPath: 'ISL_Gifs/there was traffic jam.gif',
+            description: 'There was traffic jam sign'
+        },
+        'thursday': {
+            keywords: ['thursday', 'thursday', '4th day', 'thu', 'weekday', 'work'],
+            gifPath: 'ISL_Gifs/thursday.gif',
+            description: 'Thursday sign'
+        },
+        'toilet': {
+            keywords: ['toilet', 'bathroom', 'restroom', 'washroom', 'wc', 'facility'],
+            gifPath: 'ISL_Gifs/toilet.gif',
+            description: 'Toilet sign'
+        },
+        'tomato': {
+            keywords: ['tomato', 'vegetable', 'red', 'fruit', 'cooking', 'salad'],
+            gifPath: 'ISL_Gifs/tomato.gif',
+            description: 'Tomato sign'
+        },
+        'tuesday': {
+            keywords: ['tuesday', 'tuesday', '2nd day', 'tue', 'weekday', 'work'],
+            gifPath: 'ISL_Gifs/tuesday.gif',
+            description: 'Tuesday sign'
+        },
+        'usa': {
+            keywords: ['usa', 'united states', 'america', 'country', 'nation', 'states'],
+            gifPath: 'ISL_Gifs/usa.gif',
+            description: 'USA sign'
+        },
+        'village': {
+            keywords: ['village', 'rural', 'countryside', 'small town', 'community', 'agricultural'],
+            gifPath: 'ISL_Gifs/village.gif',
+            description: 'Village sign'
+        },
+        'wednesday': {
+            keywords: ['wednesday', 'wednesday', '3rd day', 'wed', 'weekday', 'work'],
+            gifPath: 'ISL_Gifs/wednesday.gif',
+            description: 'Wednesday sign'
+        },
+        'address': {
+            keywords: ['address', 'location', 'place', 'where', 'residence', 'home'],
+            gifPath: 'ISL_Gifs/address.gif',
+            description: 'Address sign'
+        },
+        'ahemdabad': {
+            keywords: ['ahemdabad', 'ahmedabad', 'city', 'gujarat', 'india', 'textile'],
+            gifPath: 'ISL_Gifs/ahemdabad.gif',
+            description: 'Ahmedabad sign'
+        },
+        'all': {
+            keywords: ['all', 'everything', 'total', 'complete', 'whole', 'entire'],
+            gifPath: 'ISL_Gifs/all.gif',
+            description: 'All sign'
+        },
+        'assam': {
+            keywords: ['assam', 'state', 'india', 'northeast', 'tea', 'brahmaputra'],
+            gifPath: 'ISL_Gifs/assam.gif',
+            description: 'Assam sign'
+        },
+        'august': {
+            keywords: ['august', 'month', 'summer', 'aug', '8th month', 'vacation'],
+            gifPath: 'ISL_Gifs/august.gif',
+            description: 'August sign'
+        },
+        'banana': {
+            keywords: ['banana', 'fruit', 'yellow', 'tropical', 'potassium', 'healthy'],
+            gifPath: 'ISL_Gifs/banana.gif',
+            description: 'Banana sign'
+        },
+        'banaras': {
+            keywords: ['banaras', 'varanasi', 'city', 'uttar pradesh', 'india', 'holy city'],
+            gifPath: 'ISL_Gifs/banaras.gif',
+            description: 'Banaras sign'
+        },
+        'banglore': {
+            keywords: ['banglore', 'bangalore', 'bengaluru', 'city', 'karnataka', 'india', 'it hub'],
+            gifPath: 'ISL_Gifs/banglore.gif',
+            description: 'Bangalore sign'
+        },
+        'bridge': {
+            keywords: ['bridge', 'crossing', 'river', 'connection', 'structure', 'engineering'],
+            gifPath: 'ISL_Gifs/bridge.gif',
+            description: 'Bridge sign'
+        },
+        'cat': {
+            keywords: ['cat', 'feline', 'pet', 'animal', 'meow', 'domestic'],
+            gifPath: 'ISL_Gifs/cat.gif',
+            description: 'Cat sign'
+        },
+        'christmas': {
+            keywords: ['christmas', 'holiday', 'celebration', 'december', 'gift', 'christian'],
+            gifPath: 'ISL_Gifs/christmas.gif',
+            description: 'Christmas sign'
+        },
+        'church': {
+            keywords: ['church', 'worship', 'christian', 'religion', 'prayer', 'holy'],
+            gifPath: 'ISL_Gifs/church.gif',
+            description: 'Church sign'
+        },
+        'cilinic': {
+            keywords: ['cilinic', 'clinic', 'medical', 'health', 'doctor', 'hospital'],
+            gifPath: 'ISL_Gifs/cilinic.gif',
+            description: 'Clinic sign'
+        },
+        'dasara': {
+            keywords: ['dasara', 'dussehra', 'festival', 'hindu', 'celebration', 'victory'],
+            gifPath: 'ISL_Gifs/dasara.gif',
+            description: 'Dasara sign'
+        },
+        'december': {
+            keywords: ['december', 'month', 'winter', 'dec', '12th month', 'christmas'],
+            gifPath: 'ISL_Gifs/december.gif',
+            description: 'December sign'
         }
     };
     
@@ -214,7 +679,7 @@ function displayNoMatch() {
         <div class="no-match">
             <div class="no-match-icon">❓</div>
             <div class="no-match-text">No matching sign found</div>
-            <div class="no-match-hint">Try saying: "hello", "thank you", or "i love you"</div>
+            <div class="no-match-hint">Try saying: "hello", "thank you", "i love you", "how are you", "good morning", "what is your name", "nice to meet you", "please wait", "what are you doing", "are you busy", "i am fine", "i am sorry", "i am thinking", "i am tired", "i am a clerk", "i go to a theatre", "i love to shop", "i like pink colour", "i forgot", "let's go for lunch", "shall I help you", "shall we go together", "open the door", "please call me later", "sit down", "stand up", "take care", "what is the problem", "what is today's date", "what does your father do", "what is your mobile number", "where is the bathroom", "where is the police station", "you are wrong", "don't worry", "be careful", "any questions", "are you angry", "are you hungry", "are you ok", "are you okay", "did you finish homework", "do not know", "do you have money", "do you want something to drink", "do you watch TV", "flower is beautiful", "good question", "grapes", "hindu", "hyderabad", "job", "july", "june", "karnataka", "kerala", "krishna", "love you", "mango", "may", "mile", "mumbai", "nagpur", "police station", "post office", "pune", "punjab", "saturday", "shop", "sign language interpreter", "temple", "there was traffic jam", "thursday", "toilet", "tomato", "tuesday", "usa", "village", "wednesday", "address", "ahmedabad", "all", "assam", "august", "banana", "banaras", "bangalore", "bridge", "cat", "christmas", "church", "clinic", "dasara", "december"</div>
         </div>
     `;
 }
