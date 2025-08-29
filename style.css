@@ -301,11 +301,17 @@ canvas {
 }
 
 /* Help Section */
-.help-section {
+.help-section-container {
+    display: flex;
+    justify-content: flex-end;
     width: 100%;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.help-section {
+    width: 400px;
+    margin: 0;
+    padding: 0;
 }
 
 .help-content {
