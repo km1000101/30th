@@ -105,6 +105,20 @@ Our project follows a well-organized structure designed for optimal user experie
 
 For a detailed interactive sitemap, you can explore our project structure at: [Octopus Sitemap](https://octopus.do/a18z9uhhb1n)
 
+## 📊 Project Presentation
+
+Our project is also available as a comprehensive presentation that covers all aspects of the Indian Sign Language Translator system. You can access it in multiple formats:
+
+- **📄 PDF Version**: [Download Presentation PDF](project_ppt.pdf)
+- **🌐 Live Canva Version**: [View Interactive Presentation](https://www.canva.com/design/DAGobmuI5qQ/6PWe3P468IhbBKaoEAyiYg/view?utm_content=DAGobmuI5qQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h120e3204b4)
+
+The presentation provides:
+- **Project Overview** - Introduction to ISL and our solution
+- **Technical Architecture** - Detailed system design and implementation
+- **Features Demo** - Visual walkthrough of key functionalities
+- **Results & Impact** - Performance metrics and user benefits
+- **Future Roadmap** - Planned enhancements and developments
+
 ## 🛠️ Technology Stack
 
 ### Frontend
