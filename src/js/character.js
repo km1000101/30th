@@ -115,6 +115,16 @@ const characterClasses = [
     'N', 'nothing', 'O', 'P', 'Q', 'R', 'S', 'space', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
+// Hand connections for MediaPipe Hands
+const HAND_CONNECTIONS = [
+    [0, 1], [1, 2], [2, 3], [3, 4], // thumb
+    [0, 5], [5, 6], [6, 7], [7, 8], // index finger
+    [0, 9], [9, 10], [10, 11], [11, 12], // middle finger
+    [0, 13], [13, 14], [14, 15], [15, 16], // ring finger
+    [0, 17], [17, 18], [18, 19], [19, 20], // pinky
+    [0, 5], [5, 9], [9, 13], [13, 17] // palm connections
+];
+
 // MediaPipe Hands configuration
 const handsConfig = {
     locateFile: (file) => {
@@ -360,7 +370,42 @@ async function main() {
         updateStatus('Failed to initialize character recognition system', 'error');
         
         if (outputElement) {
-            outputElement.innerHTML = '<span style="color: #ff4444;">Error: Failed to load character recognition system</span>';
+            outputElement.innerHTML = '<span style="color: #ff4444;">Error: Failed to load character recognition system. Please check if the model files are accessible.</span>';
+        }
+        
+        // Try alternative model path if the first one fails
+        if (error.message.includes('model.json') || error.message.includes('404')) {
+            try {
+                console.log('Trying alternative model path...');
+                model = await tf.loadLayersModel('../../models/isl_character_model/model.json');
+                console.log('Model loaded with alternative path.');
+                updateStatus('Model loaded successfully with alternative path!', 'success');
+                
+                // Continue with initialization
+                hands = new Hands(handsConfig);
+                hands.setOptions(modelConfig);
+                hands.onResults(onResults);
+                
+                camera = new Camera(videoElement, {
+                    onFrame: async () => {
+                        await hands.send({ image: videoElement });
+                    },
+                    width: 640,
+                    height: 480
+                });
+                
+                camera.start();
+                
+                setTimeout(() => {
+                    hideLoadingOverlay();
+                    updateStatus('Camera active - Ready for character recognition', 'success');
+                    showCameraOverlay();
+                }, 1000);
+                
+                return;
+            } catch (altError) {
+                console.error('Alternative model path also failed:', altError);
+            }
         }
         
         setTimeout(() => {

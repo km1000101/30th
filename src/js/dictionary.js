@@ -138,22 +138,28 @@ function setupEventListeners() {
     const viewButtons = document.querySelectorAll('.view-btn');
 
     // Search input
-    searchInput.addEventListener('input', function() {
-        searchQuery = this.value.toLowerCase();
-        filterSigns();
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            searchQuery = this.value.toLowerCase();
+            filterSigns();
+        });
+    }
 
     // Category filter
-    categoryFilter.addEventListener('change', function() {
-        currentCategory = this.value;
-        filterSigns();
-    });
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', function() {
+            currentCategory = this.value;
+            filterSigns();
+        });
+    }
 
     // Difficulty filter
-    difficultyFilter.addEventListener('change', function() {
-        currentDifficulty = this.value;
-        filterSigns();
-    });
+    if (difficultyFilter) {
+        difficultyFilter.addEventListener('change', function() {
+            currentDifficulty = this.value;
+            filterSigns();
+        });
+    }
 
     // View toggle
     viewButtons.forEach(btn => {
@@ -189,7 +195,10 @@ function setCategory(category) {
     });
     
     // Update category filter dropdown
-    document.getElementById('category-filter').value = category;
+    const categoryFilter = document.getElementById('category-filter');
+    if (categoryFilter) {
+        categoryFilter.value = category;
+    }
     
     filterSigns();
 }
@@ -208,7 +217,9 @@ function setView(view) {
     
     // Update container class
     const container = document.getElementById('signs-container');
-    container.className = `signs-${view}`;
+    if (container) {
+        container.className = `signs-${view}`;
+    }
     
     // Reload signs with new view
     filterSigns();
@@ -260,6 +271,11 @@ function filterSigns() {
 function displaySigns(signs) {
     const container = document.getElementById('signs-container');
     
+    if (!container) {
+        console.error('Signs container not found');
+        return;
+    }
+    
     if (signs.length === 0) {
         container.innerHTML = `
             <div class="no-results">
@@ -280,8 +296,11 @@ function createSignCard(sign) {
     return `
         <div class="sign-card" data-category="${sign.category}" data-difficulty="${sign.difficulty}">
             <div class="sign-video">
-                <img src="${sign.gif}" alt="${sign.name} sign" class="sign-gif" onerror="this.src='../assets/gifs/placeholder.gif'">
+                <img src="${sign.gif}" alt="${sign.name} sign" class="sign-gif" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="play-overlay" onclick="playSign('${sign.id}')">▶️</div>
+                <div class="image-fallback" style="display: none; width: 100%; height: 100%; background: rgba(123, 47, 242, 0.1); border: 2px dashed rgba(123, 47, 242, 0.3); display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 0.9rem;">
+                    <span>Image not available</span>
+                </div>
             </div>
             <div class="sign-info">
                 <h3>${sign.name}</h3>
@@ -299,20 +318,24 @@ function createSignCard(sign) {
 // Update results count
 function updateResultsCount(count) {
     const resultsCount = document.getElementById('results-count');
-    if (count === 0) {
-        resultsCount.textContent = 'No signs found';
-    } else if (count === 1) {
-        resultsCount.textContent = 'Showing 1 sign';
-    } else {
-        resultsCount.textContent = `Showing ${count} signs`;
+    if (resultsCount) {
+        if (count === 0) {
+            resultsCount.textContent = 'No signs found';
+        } else if (count === 1) {
+            resultsCount.textContent = 'Showing 1 sign';
+        } else {
+            resultsCount.textContent = `Showing ${count} signs`;
+        }
     }
 }
 
 // Search signs function
 function searchSigns() {
     const searchInput = document.getElementById('search-input');
-    searchQuery = searchInput.value.toLowerCase();
-    filterSigns();
+    if (searchInput) {
+        searchQuery = searchInput.value.toLowerCase();
+        filterSigns();
+    }
 }
 
 // Play sign animation

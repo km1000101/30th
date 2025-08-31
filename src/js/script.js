@@ -166,478 +166,478 @@ function findMatchingGif(speech) {
     const gifMappings = {
         'hello': {
             keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening'],
-            gifPath: '../assets/gifs/hello.gif',
+            gifPath: './src/assets/gifs/hello.gif',
             description: 'Hello sign'
         },
         'thank you': {
             keywords: ['thank you', 'thanks', 'thank', 'grateful', 'appreciate', 'bless you'],
-            gifPath: '../assets/gifs/thank you.gif',
+            gifPath: './src/assets/gifs/thank you.gif',
             description: 'Thank you sign'
         },
         'i love you': {
             keywords: ['i love you', 'love you', 'love', 'heart', 'care', 'affection'],
-            gifPath: '../assets/gifs/i love you.gif',
+            gifPath: './src/assets/gifs/i love you.gif',
             description: 'I love you sign'
         },
         'how are you': {
             keywords: ['how are you', 'how you doing', 'how do you feel', 'are you ok', 'are you okay'],
-            gifPath: '../assets/gifs/how are you.gif',
+            gifPath: './src/assets/gifs/how are you.gif',
             description: 'How are you sign'
         },
         'good morning': {
             keywords: ['good morning', 'morning', 'rise and shine', 'early'],
-            gifPath: '../assets/gifs/good morning.gif',
+            gifPath: './src/assets/gifs/good morning.gif',
             description: 'Good morning sign'
         },
         'good afternoon': {
             keywords: ['good afternoon', 'afternoon', 'midday'],
-            gifPath: '../assets/gifs/good afternoon.gif',
+            gifPath: './src/assets/gifs/good afternoon.gif',
             description: 'Good afternoon sign'
         },
         'what is your name': {
             keywords: ['what is your name', 'your name', 'name', 'who are you', 'identify yourself'],
-            gifPath: '../assets/gifs/what is your name.gif',
+            gifPath: './src/assets/gifs/what is your name.gif',
             description: 'What is your name sign'
         },
 
         'nice to meet you': {
             keywords: ['nice to meet you', 'pleasure to meet you', 'glad to meet you', 'good to see you'],
-            gifPath: '../assets/gifs/nice to meet you.gif',
+            gifPath: './src/assets/gifs/nice to meet you.gif',
             description: 'Nice to meet you sign'
         },
         'please wait for sometime': {
             keywords: ['please wait', 'wait', 'hold on', 'give me a moment', 'wait for sometime'],
-            gifPath: '../assets/gifs/please wait for sometime.gif',
+            gifPath: './src/assets/gifs/please wait for sometime.gif',
             description: 'Please wait sign'
         },
         'what are you doing': {
             keywords: ['what are you doing', 'what you doing', 'what\'s up', 'whats up', 'what\'s happening'],
-            gifPath: '../assets/gifs/what are you doing.gif',
+            gifPath: './src/assets/gifs/what are you doing.gif',
             description: 'What are you doing sign'
         },
         'are you busy': {
             keywords: ['are you busy', 'busy', 'occupied', 'do you have time', 'free'],
-            gifPath: '../assets/gifs/are you busy.gif',
+            gifPath: './src/assets/gifs/are you busy.gif',
             description: 'Are you busy sign'
         },
         'i am fine': {
             keywords: ['i am fine', 'i\'m fine', 'fine', 'good', 'okay', 'alright', 'well'],
-            gifPath: '../assets/gifs/i am fine.gif',
+            gifPath: './src/assets/gifs/i am fine.gif',
             description: 'I am fine sign'
         },
         'i am sorry': {
             keywords: ['i am sorry', 'i\'m sorry', 'sorry', 'apologize', 'excuse me', 'pardon'],
-            gifPath: '../assets/gifs/i am sorry.gif',
+            gifPath: './src/assets/gifs/i am sorry.gif',
             description: 'I am sorry sign'
         },
         'i am thinking': {
             keywords: ['i am thinking', 'i\'m thinking', 'thinking', 'thought', 'considering', 'pondering'],
-            gifPath: '../assets/gifs/i am thinking.gif',
+            gifPath: './src/assets/gifs/i am thinking.gif',
             description: 'I am thinking sign'
         },
         'i am tired': {
             keywords: ['i am tired', 'i\'m tired', 'tired', 'exhausted', 'sleepy', 'fatigued'],
-            gifPath: '../assets/gifs/i am tired.gif',
+            gifPath: './src/assets/gifs/i am tired.gif',
             description: 'I am tired sign'
         },
         'i am a clerk': {
             keywords: ['i am a clerk', 'i\'m a clerk', 'clerk', 'office worker', 'administrative', 'job'],
-            gifPath: '../assets/gifs/i am a clerk.gif',
+            gifPath: './src/assets/gifs/i am a clerk.gif',
             description: 'I am a clerk sign'
         },
         'i go to a theatre': {
             keywords: ['i go to a theatre', 'theatre', 'movie', 'cinema', 'entertainment', 'show'],
-            gifPath: '../assets/gifs/i go to a theatre.gif',
+            gifPath: './src/assets/gifs/i go to a theatre.gif',
             description: 'I go to a theatre sign'
         },
         'i love to shop': {
             keywords: ['i love to shop', 'shopping', 'buy', 'retail', 'mall', 'store'],
-            gifPath: '../assets/gifs/i love to shop.gif',
+            gifPath: './src/assets/gifs/i love to shop.gif',
             description: 'I love to shop sign'
         },
         'i like pink colour': {
             keywords: ['i like pink colour', 'pink', 'color', 'colour', 'favorite color', 'prefer pink'],
-            gifPath: '../assets/gifs/i like pink colour.gif',
+            gifPath: './src/assets/gifs/i like pink colour.gif',
             description: 'I like pink colour sign'
         },
         'i had to say something but I forgot': {
             keywords: ['i forgot', 'forgot', 'memory', 'remember', 'remind me', 'lost my thought'],
-            gifPath: '../assets/gifs/i had to say something but I forgot.gif',
+            gifPath: './src/assets/gifs/i had to say something but I forgot.gif',
             description: 'I forgot what I was going to say sign'
         },
         'lets go for lunch': {
             keywords: ['lets go for lunch', 'lunch', 'eat', 'meal', 'food', 'dining', 'restaurant'],
-            gifPath: '../assets/gifs/lets go for lunch.gif',
+            gifPath: './src/assets/gifs/lets go for lunch.gif',
             description: 'Let\'s go for lunch sign'
         },
         'shall I help you': {
             keywords: ['shall I help you', 'help you', 'assist', 'support', 'aid', 'can I help'],
-            gifPath: '../assets/gifs/shall I help you.gif',
+            gifPath: './src/assets/gifs/shall I help you.gif',
             description: 'Shall I help you sign'
         },
         'shall we go together tommorow': {
             keywords: ['shall we go together', 'tomorrow', 'tommorow', 'together', 'accompany', 'join'],
-            gifPath: '../assets/gifs/shall we go together tommorow.gif',
+            gifPath: './src/assets/gifs/shall we go together tommorow.gif',
             description: 'Shall we go together tomorrow sign'
         },
         'open the door': {
             keywords: ['open the door', 'door', 'open', 'entrance', 'exit', 'gate'],
-            gifPath: '../assets/gifs/open the door.gif',
+            gifPath: './src/assets/gifs/open the door.gif',
             description: 'Open the door sign'
         },
         'please call me later': {
             keywords: ['please call me later', 'call me later', 'call back', 'phone later', 'contact later'],
-            gifPath: '../assets/gifs/please call me later.gif',
+            gifPath: './src/assets/gifs/please call me later.gif',
             description: 'Please call me later sign'
         },
         'sit down': {
             keywords: ['sit down', 'sit', 'seat', 'chair', 'rest', 'take a seat'],
-            gifPath: '../assets/gifs/sit down.gif',
+            gifPath: './src/assets/gifs/sit down.gif',
             description: 'Sit down sign'
         },
         'stand up': {
             keywords: ['stand up', 'stand', 'rise', 'get up', 'upright', 'on your feet'],
-            gifPath: '../assets/gifs/stand up.gif',
+            gifPath: './src/assets/gifs/stand up.gif',
             description: 'Stand up sign'
         },
         'take care': {
             keywords: ['take care', 'care', 'be careful', 'look after yourself', 'stay safe', 'goodbye'],
-            gifPath: '../assets/gifs/take care.gif',
+            gifPath: './src/assets/gifs/take care.gif',
             description: 'Take care sign'
         },
         'what is the problem': {
             keywords: ['what is the problem', 'problem', 'issue', 'trouble', 'what\'s wrong', 'difficulty'],
-            gifPath: '../assets/gifs/what is the problem.gif',
+            gifPath: './src/assets/gifs/what is the problem.gif',
             description: 'What is the problem sign'
         },
         'what is today\'s date': {
             keywords: ['what is today\'s date', 'date', 'today', 'day', 'calendar', 'what day is it'],
-            gifPath: '../assets/gifs/what is today\'s date.gif',
+            gifPath: './src/assets/gifs/what is today\'s date.gif',
             description: 'What is today\'s date sign'
         },
         'what is your father do': {
             keywords: ['what is your father do', 'father', 'dad', 'parent', 'occupation', 'job'],
-            gifPath: '../assets/gifs/what is your father do.gif',
+            gifPath: './src/assets/gifs/what is your father do.gif',
             description: 'What does your father do sign'
         },
         'what is your mobile number': {
             keywords: ['what is your mobile number', 'mobile number', 'phone number', 'contact number', 'cell'],
-            gifPath: '../assets/gifs/what is your mobile number.gif',
+            gifPath: './src/assets/gifs/what is your mobile number.gif',
             description: 'What is your mobile number sign'
         },
         'where is the bathroom': {
             keywords: ['where is the bathroom', 'bathroom', 'toilet', 'restroom', 'washroom', 'wc'],
-            gifPath: '../assets/gifs/where is the bathroom.gif',
+            gifPath: './src/assets/gifs/where is the bathroom.gif',
             description: 'Where is the bathroom sign'
         },
         'where is the police station': {
             keywords: ['where is the police station', 'police station', 'police', 'station', 'law enforcement'],
-            gifPath: '../assets/gifs/where is the police station.gif',
+            gifPath: './src/assets/gifs/where is the police station.gif',
             description: 'Where is the police station sign'
         },
         'you are wrong': {
             keywords: ['you are wrong', 'wrong', 'incorrect', 'mistake', 'error', 'not right'],
-            gifPath: '../assets/gifs/you are wrong.gif',
+            gifPath: './src/assets/gifs/you are wrong.gif',
             description: 'You are wrong sign'
         },
         'dont worry': {
             keywords: ['dont worry', 'don\'t worry', 'worry', 'anxious', 'concerned', 'relax'],
-            gifPath: '../assets/gifs/dont worry.gif',
+            gifPath: './src/assets/gifs/dont worry.gif',
             description: 'Don\'t worry sign'
         },
         'be careful': {
             keywords: ['be careful', 'careful', 'caution', 'watch out', 'attention', 'mindful'],
-            gifPath: '../assets/gifs/be careful.gif',
+            gifPath: './src/assets/gifs/be careful.gif',
             description: 'Be careful sign'
         },
         'any questions': {
             keywords: ['any questions', 'questions', 'ask', 'inquiry', 'doubt', 'clarification'],
-            gifPath: '../assets/gifs/any questions.gif',
+            gifPath: './src/assets/gifs/any questions.gif',
             description: 'Any questions sign'
         },
         'are you angry': {
             keywords: ['are you angry', 'angry', 'mad', 'upset', 'furious', 'irritated'],
-            gifPath: '../assets/gifs/are you angry.gif',
+            gifPath: './src/assets/gifs/are you angry.gif',
             description: 'Are you angry sign'
         },
         'are you hungry': {
             keywords: ['are you hungry', 'hungry', 'starving', 'food', 'eat', 'appetite'],
-            gifPath: '../assets/gifs/are you hungry.gif',
+            gifPath: './src/assets/gifs/are you hungry.gif',
             description: 'Are you hungry sign'
         },
         'are you ok': {
             keywords: ['are you ok', 'are you okay', 'okay', 'ok', 'alright', 'fine'],
-            gifPath: '../assets/gifs/are you ok.gif',
+            gifPath: './src/assets/gifs/are you ok.gif',
             description: 'Are you ok sign'
         },
         'are you okay': {
             keywords: ['are you okay', 'are you ok', 'okay', 'ok', 'alright', 'fine'],
-            gifPath: '../assets/gifs/are you okay.gif',
+            gifPath: './src/assets/gifs/are you okay.gif',
             description: 'Are you okay sign'
         },
         'did you finish homework': {
             keywords: ['did you finish homework', 'homework', 'assignment', 'complete', 'finish', 'study'],
-            gifPath: '../assets/gifs/did you finish homework.gif',
+            gifPath: './src/assets/gifs/did you finish homework.gif',
             description: 'Did you finish homework sign'
         },
         'do not know': {
             keywords: ['do not know', 'don\'t know', 'unknown', 'unsure', 'uncertain', 'no idea'],
-            gifPath: '../assets/gifs/do not know.gif',
+            gifPath: './src/assets/gifs/do not know.gif',
             description: 'Do not know sign'
         },
         'do you have money': {
             keywords: ['do you have money', 'money', 'cash', 'funds', 'currency', 'wealth'],
-            gifPath: '../assets/gifs/do you have money.gif',
+            gifPath: './src/assets/gifs/do you have money.gif',
             description: 'Do you have money sign'
         },
         'do you want something to drink': {
             keywords: ['do you want something to drink', 'drink', 'beverage', 'thirsty', 'water', 'juice'],
-            gifPath: '../assets/gifs/do you want something to drink.gif',
+            gifPath: './src/assets/gifs/do you want something to drink.gif',
             description: 'Do you want something to drink sign'
         },
         'do you watch TV': {
             keywords: ['do you watch TV', 'TV', 'television', 'watch', 'program', 'show'],
-            gifPath: '../assets/gifs/do you watch TV.gif',
+            gifPath: './src/assets/gifs/do you watch TV.gif',
             description: 'Do you watch TV sign'
         },
         'flower is beautiful': {
             keywords: ['flower is beautiful', 'flower', 'beautiful', 'pretty', 'bloom', 'nature'],
-            gifPath: '../assets/gifs/flower is beautiful.gif',
+            gifPath: './src/assets/gifs/flower is beautiful.gif',
             description: 'Flower is beautiful sign'
         },
         'good question': {
             keywords: ['good question', 'question', 'inquiry', 'ask', 'curious', 'wonder'],
-            gifPath: '../assets/gifs/good question.gif',
+            gifPath: './src/assets/gifs/good question.gif',
             description: 'Good question sign'
         },
         'grapes': {
             keywords: ['grapes', 'fruit', 'grape', 'vine', 'wine', 'purple'],
-            gifPath: '../assets/gifs/grapes.gif',
+            gifPath: './src/assets/gifs/grapes.gif',
             description: 'Grapes sign'
         },
         'hindu': {
             keywords: ['hindu', 'religion', 'faith', 'belief', 'spiritual', 'temple'],
-            gifPath: '../assets/gifs/hindu.gif',
+            gifPath: './src/assets/gifs/hindu.gif',
             description: 'Hindu sign'
         },
         'hyderabad': {
             keywords: ['hyderabad', 'city', 'place', 'location', 'india', 'telangana'],
-            gifPath: '../assets/gifs/hyderabad.gif',
+            gifPath: './src/assets/gifs/hyderabad.gif',
             description: 'Hyderabad sign'
         },
         'job': {
             keywords: ['job', 'work', 'employment', 'career', 'profession', 'occupation'],
-            gifPath: '../assets/gifs/job.gif',
+            gifPath: './src/assets/gifs/job.gif',
             description: 'Job sign'
         },
         'july': {
             keywords: ['july', 'month', 'summer', 'jul', '7th month', 'vacation'],
-            gifPath: '../assets/gifs/july.gif',
+            gifPath: './src/assets/gifs/july.gif',
             description: 'July sign'
         },
         'june': {
             keywords: ['june', 'month', 'summer', 'jun', '6th month', 'vacation'],
-            gifPath: '../assets/gifs/june.gif',
+            gifPath: './src/assets/gifs/june.gif',
             description: 'June sign'
         },
         'karnataka': {
             keywords: ['karnataka', 'state', 'india', 'bangalore', 'bengaluru', 'south india'],
-            gifPath: '../assets/gifs/karnataka.gif',
+            gifPath: './src/assets/gifs/karnataka.gif',
             description: 'Karnataka sign'
         },
         'kerala': {
             keywords: ['kerala', 'state', 'india', 'god\'s own country', 'south india', 'coastal'],
-            gifPath: '../assets/gifs/kerala.gif',
+            gifPath: './src/assets/gifs/kerala.gif',
             description: 'Kerala sign'
         },
         'krishna': {
             keywords: ['krishna', 'god', 'deity', 'hindu', 'divine', 'spiritual'],
-            gifPath: '../assets/gifs/krishna.gif',
+            gifPath: './src/assets/gifs/krishna.gif',
             description: 'Krishna sign'
         },
         'love you': {
             keywords: ['love you', 'love', 'affection', 'care', 'heart', 'romance'],
-            gifPath: '../assets/gifs/love you.gif',
+            gifPath: './src/assets/gifs/love you.gif',
             description: 'Love you sign'
         },
         'mango': {
             keywords: ['mango', 'fruit', 'summer', 'tropical', 'sweet', 'yellow'],
-            gifPath: '../assets/gifs/mango.gif',
+            gifPath: './src/assets/gifs/mango.gif',
             description: 'Mango sign'
         },
         'may': {
             keywords: ['may', 'month', 'spring', '5th month', 'flowers', 'bloom'],
-            gifPath: '../assets/gifs/may.gif',
+            gifPath: './src/assets/gifs/may.gif',
             description: 'May sign'
         },
         'mile': {
             keywords: ['mile', 'distance', 'measurement', 'unit', 'length', 'road'],
-            gifPath: '../assets/gifs/mile.gif',
+            gifPath: './src/assets/gifs/mile.gif',
             description: 'Mile sign'
         },
         'mumbai': {
             keywords: ['mumbai', 'city', 'bombay', 'maharashtra', 'india', 'financial capital'],
-            gifPath: '../assets/gifs/mumbai.gif',
+            gifPath: './src/assets/gifs/mumbai.gif',
             description: 'Mumbai sign'
         },
         'nagpur': {
             keywords: ['nagpur', 'city', 'maharashtra', 'india', 'orange city', 'central india'],
-            gifPath: '../assets/gifs/nagpur.gif',
+            gifPath: './src/assets/gifs/nagpur.gif',
             description: 'Nagpur sign'
         },
         'police station': {
             keywords: ['police station', 'police', 'station', 'law enforcement', 'security', 'help'],
-            gifPath: '../assets/gifs/police station.gif',
+            gifPath: './src/assets/gifs/police station.gif',
             description: 'Police station sign'
         },
         'post office': {
             keywords: ['post office', 'post', 'mail', 'letter', 'package', 'communication'],
-            gifPath: '../assets/gifs/post office.gif',
+            gifPath: './src/assets/gifs/post office.gif',
             description: 'Post office sign'
         },
         'pune': {
             keywords: ['pune', 'city', 'maharashtra', 'india', 'oxford of the east', 'cultural'],
-            gifPath: '../assets/gifs/pune.gif',
+            gifPath: './src/assets/gifs/pune.gif',
             description: 'Pune sign'
         },
         'punjab': {
             keywords: ['punjab', 'state', 'india', 'land of five rivers', 'north india', 'agricultural'],
-            gifPath: '../assets/gifs/punjab.gif',
+            gifPath: './src/assets/gifs/punjab.gif',
             description: 'Punjab sign'
         },
         'saturday': {
             keywords: ['saturday', 'saturday', 'weekend', '6th day', 'sat', 'free time'],
-            gifPath: '../assets/gifs/saturday.gif',
+            gifPath: './src/assets/gifs/saturday.gif',
             description: 'Saturday sign'
         },
         'shop': {
             keywords: ['shop', 'store', 'buy', 'retail', 'purchase', 'market'],
-            gifPath: '../assets/gifs/shop.gif',
+            gifPath: './src/assets/gifs/shop.gif',
             description: 'Shop sign'
         },
         'sign language interpreter': {
             keywords: ['sign language interpreter', 'interpreter', 'translator', 'sign language', 'communication', 'deaf'],
-            gifPath: '../assets/gifs/sign language interpreter.gif',
+            gifPath: './src/assets/gifs/sign language interpreter.gif',
             description: 'Sign language interpreter sign'
         },
         'temple': {
             keywords: ['temple', 'worship', 'prayer', 'religious', 'sacred', 'spiritual'],
-            gifPath: '../assets/gifs/temple.gif',
+            gifPath: './src/assets/gifs/temple.gif',
             description: 'Temple sign'
         },
         'there was traffic jam': {
             keywords: ['there was traffic jam', 'traffic jam', 'traffic', 'congestion', 'stuck', 'delay'],
-            gifPath: '../assets/gifs/there was traffic jam.gif',
+            gifPath: './src/assets/gifs/there was traffic jam.gif',
             description: 'There was traffic jam sign'
         },
         'thursday': {
             keywords: ['thursday', 'thursday', '4th day', 'thu', 'weekday', 'work'],
-            gifPath: '../assets/gifs/thursday.gif',
+            gifPath: './src/assets/gifs/thursday.gif',
             description: 'Thursday sign'
         },
         'toilet': {
             keywords: ['toilet', 'bathroom', 'restroom', 'washroom', 'wc', 'facility'],
-            gifPath: '../assets/gifs/toilet.gif',
+            gifPath: './src/assets/gifs/toilet.gif',
             description: 'Toilet sign'
         },
         'tomato': {
             keywords: ['tomato', 'vegetable', 'red', 'fruit', 'cooking', 'salad'],
-            gifPath: '../assets/gifs/tomato.gif',
+            gifPath: './src/assets/gifs/tomato.gif',
             description: 'Tomato sign'
         },
         'tuesday': {
             keywords: ['tuesday', 'tuesday', '2nd day', 'tue', 'weekday', 'work'],
-            gifPath: '../assets/gifs/tuesday.gif',
+            gifPath: './src/assets/gifs/tuesday.gif',
             description: 'Tuesday sign'
         },
         'usa': {
             keywords: ['usa', 'united states', 'america', 'country', 'nation', 'states'],
-            gifPath: '../assets/gifs/usa.gif',
+            gifPath: './src/assets/gifs/usa.gif',
             description: 'USA sign'
         },
         'village': {
             keywords: ['village', 'rural', 'countryside', 'small town', 'community', 'agricultural'],
-            gifPath: '../assets/gifs/village.gif',
+            gifPath: './src/assets/gifs/village.gif',
             description: 'Village sign'
         },
         'wednesday': {
             keywords: ['wednesday', 'wednesday', '3rd day', 'wed', 'weekday', 'work'],
-            gifPath: '../assets/gifs/wednesday.gif',
+            gifPath: './src/assets/gifs/wednesday.gif',
             description: 'Wednesday sign'
         },
         'address': {
             keywords: ['address', 'location', 'place', 'where', 'residence', 'home'],
-            gifPath: '../assets/gifs/address.gif',
+            gifPath: './src/assets/gifs/address.gif',
             description: 'Address sign'
         },
         'ahemdabad': {
             keywords: ['ahemdabad', 'ahmedabad', 'city', 'gujarat', 'india', 'textile'],
-            gifPath: '../assets/gifs/ahemdabad.gif',
+            gifPath: './src/assets/gifs/ahemdabad.gif',
             description: 'Ahmedabad sign'
         },
         'all': {
             keywords: ['all', 'everything', 'total', 'complete', 'whole', 'entire'],
-            gifPath: '../assets/gifs/all.gif',
+            gifPath: './src/assets/gifs/all.gif',
             description: 'All sign'
         },
         'assam': {
             keywords: ['assam', 'state', 'india', 'northeast', 'tea', 'brahmaputra'],
-            gifPath: '../assets/gifs/assam.gif',
+            gifPath: './src/assets/gifs/assam.gif',
             description: 'Assam sign'
         },
         'august': {
             keywords: ['august', 'month', 'summer', 'aug', '8th month', 'vacation'],
-            gifPath: '../assets/gifs/august.gif',
+            gifPath: './src/assets/gifs/august.gif',
             description: 'August sign'
         },
         'banana': {
             keywords: ['banana', 'fruit', 'yellow', 'tropical', 'potassium', 'healthy'],
-            gifPath: '../assets/gifs/banana.gif',
+            gifPath: './src/assets/gifs/banana.gif',
             description: 'Banana sign'
         },
         'banaras': {
             keywords: ['banaras', 'varanasi', 'city', 'uttar pradesh', 'india', 'holy city'],
-            gifPath: '../assets/gifs/banaras.gif',
+            gifPath: './src/assets/gifs/banaras.gif',
             description: 'Banaras sign'
         },
         'banglore': {
             keywords: ['banglore', 'bangalore', 'bengaluru', 'city', 'karnataka', 'india', 'it hub'],
-            gifPath: '../assets/gifs/banglore.gif',
+            gifPath: './src/assets/gifs/banglore.gif',
             description: 'Bangalore sign'
         },
         'bridge': {
             keywords: ['bridge', 'crossing', 'river', 'connection', 'structure', 'engineering'],
-            gifPath: '../assets/gifs/bridge.gif',
+            gifPath: './src/assets/gifs/bridge.gif',
             description: 'Bridge sign'
         },
         'cat': {
             keywords: ['cat', 'feline', 'pet', 'animal', 'meow', 'domestic'],
-            gifPath: '../assets/gifs/cat.gif',
+            gifPath: './src/assets/gifs/cat.gif',
             description: 'Cat sign'
         },
         'christmas': {
             keywords: ['christmas', 'holiday', 'celebration', 'december', 'gift', 'christian'],
-            gifPath: '../assets/gifs/christmas.gif',
+            gifPath: './src/assets/gifs/christmas.gif',
             description: 'Christmas sign'
         },
         'church': {
             keywords: ['church', 'worship', 'christian', 'religion', 'prayer', 'holy'],
-            gifPath: '../assets/gifs/church.gif',
+            gifPath: './src/assets/gifs/church.gif',
             description: 'Church sign'
         },
         'cilinic': {
             keywords: ['cilinic', 'clinic', 'medical', 'health', 'doctor', 'hospital'],
-            gifPath: '../assets/gifs/cilinic.gif',
+            gifPath: './src/assets/gifs/cilinic.gif',
             description: 'Clinic sign'
         },
         'dasara': {
             keywords: ['dasara', 'dussehra', 'festival', 'hindu', 'celebration', 'victory'],
-            gifPath: '../assets/gifs/dasara.gif',
+            gifPath: './src/assets/gifs/dasara.gif',
             description: 'Dasara sign'
         },
         'december': {
             keywords: ['december', 'month', 'winter', 'dec', '12th month', 'christmas'],
-            gifPath: '../assets/gifs/december.gif',
+            gifPath: './src/assets/gifs/december.gif',
             description: 'December sign'
         }
     };
@@ -828,7 +828,7 @@ async function main() {
         
         // Load the model
         console.log('Loading model...');
-        model = await tf.loadLayersModel('../models/model/model.json');
+        model = await tf.loadLayersModel('./src/models/model/model.json');
         console.log('Model loaded.');
         
         updateStatus('Model loaded successfully!', 'success');
