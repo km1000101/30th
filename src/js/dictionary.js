@@ -299,7 +299,7 @@ function createSignCard(sign) {
                 <img src="${sign.gif}" alt="${sign.name} sign" class="sign-gif" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="play-overlay" onclick="playSign('${sign.id}')">▶️</div>
                 <div class="image-fallback" style="display: none; width: 100%; height: 100%; background: rgba(123, 47, 242, 0.1); border: 2px dashed rgba(123, 47, 242, 0.3); display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 0.9rem;">
-                    <span>Image not available</span>
+                    <span></span>
                 </div>
             </div>
             <div class="sign-info">
