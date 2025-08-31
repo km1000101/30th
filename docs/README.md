@@ -96,6 +96,14 @@ A comprehensive web application for real-time Indian Sign Language (ISL) detecti
 │       └── convert_model_simple.py    # Simplified conversion
 ```
 
+## 🗺️ Sitemap
+
+Our project follows a well-organized structure designed for optimal user experience and development workflow. Below is a visual representation of our website architecture:
+
+![Project Sitemap](src/assets/gifs/Screenshot%202025-08-31%20112355.png)
+
+For a detailed interactive sitemap, you can explore our project structure at: [Octopus Sitemap](https://octopus.do/a18z9uhhb1n)
+
 ## 🛠️ Technology Stack
 
 ### Frontend
