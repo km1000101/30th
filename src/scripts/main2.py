@@ -91,7 +91,7 @@ def func():
                                     root = tk.Tk()
                                     lbl = ImageLabel(root)
                                     lbl.pack()
-                                    lbl.load(r'ISL_Gifs/{0}.gif'.format(a.lower()))
+                                    lbl.load(r'../assets/gifs/{0}.gif'.format(a.lower()))
                                     root.mainloop()
                                 else:
                                     for i in range(len(a)):

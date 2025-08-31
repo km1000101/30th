@@ -324,7 +324,7 @@ async function main() {
         
         // Load the model
         console.log('Loading character recognition model...');
-        model = await tf.loadLayersModel('isl_character_model/model.json');
+        model = await tf.loadLayersModel('../models/isl_character_model/model.json');
         console.log('Model loaded.');
         
         updateStatus('Model loaded successfully!', 'success');

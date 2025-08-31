@@ -1,4 +1,4 @@
-/* Ensure ISL background animation covers the whole website and is always behind all content */
+/* Ensures ISL background animation covers the whole website and is always behind all content */
 #isl-bg-canvas {
     position: fixed !important;
     top: 0;
@@ -10,7 +10,7 @@
     opacity: 0.45;
 }
 
-/* Ensure node animation canvas always covers the whole website */
+/* Ensures node animation canvas always covers the whole website */
 #node-bg-canvas {
     position: fixed !important;
     top: 0 !important;
@@ -24,7 +24,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* Reset and Base Styles */
+/* Resets and Base Styles */
 * {
     margin: 0;
     padding: 0;
