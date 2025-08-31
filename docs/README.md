@@ -2,6 +2,12 @@
 
 A comprehensive web application for real-time Indian Sign Language (ISL) detection and learning, powered by AI and computer vision.
 
+## 🌐 Live Demo
+
+**Try it now!** [Live Project Demo](https://km1000101.github.io/signwave/)
+
+Experience the Indian Sign Language Translator in action with real-time detection, interactive learning, and comprehensive sign dictionary.
+
 ## 🌟 Features
 
 ### 🎥 Real-time Sign Detection
