@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic HTML5 document setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Page title and SEO meta description -->
     <title>Sign Language to Text Translator - Real-time ISL Detection</title>
     <meta name="description" content="Real-time Indian Sign Language detection using AI and computer vision. Translate hand gestures to text instantly.">
+    
+    <!-- External font import for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet for the application -->
     <link rel="stylesheet" href="src/css/style.css">
+    
+    <!-- AI/ML Libraries for sign language detection -->
+    <!-- TensorFlow.js for machine learning model inference -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
+    <!-- MediaPipe Holistic for pose and hand landmark detection -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+    <!-- MediaPipe drawing utilities for rendering landmarks on canvas -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <!-- MediaPipe camera utilities for video stream handling -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Background animation canvas -->
+    <!-- Background animation canvas for visual effects -->
+    <!-- This canvas provides animated background elements behind all content -->
     <canvas id="isl-bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;"></canvas>
     
+    <!-- Main application header with navigation -->
     <header class="header">
         <div class="header-content">
+            <!-- Application title and description -->
             <h1>Sign Language Translator</h1>
             <p class="subtitle">Real-time Indian Sign Language Detection using AI</p>
             
-            <!-- Navigation Menu -->
+            <!-- Primary navigation menu for different app sections -->
             <nav class="main-nav">
                 <ul class="nav-list">
                     <li><a href="index.html" class="nav-link active">Home</a></li>
@@ -34,37 +50,48 @@
         </div>
     </header>
 
+    <!-- Main application content area -->
     <main class="main-content">
         <div class="main-flex-row">
             <div class="container">
+                <!-- Live camera feed section for sign language detection -->
                 <div class="camera-section">
+                    <!-- Camera section header with status indicator -->
                     <div class="camera-header">
                         <h2>Live Camera Feed</h2>
+                        <!-- Status indicator shows camera initialization state -->
                         <div class="status-indicator">
                             <span class="status-dot"></span>
                             <span class="status-text">Initializing...</span>
                         </div>
                     </div>
                     
+                    <!-- Video container with camera feed and overlay -->
                     <div class="video-container">
+                        <!-- Hidden video element for camera stream -->
                         <video id="video" style="display: none;"></video>
+                        <!-- Canvas for rendering video feed and hand landmarks -->
                         <canvas id="canvas" width="700px" height="500px"></canvas>
+                        <!-- Overlay with instructions for user -->
                         <div class="camera-overlay">
                             <div class="overlay-text">Position your hands in the camera view</div>
                         </div>
                     </div>
                     
+                    <!-- Real-time detection output display -->
                     <div class="detection-output">
                         <h3>Detected Sign:</h3>
+                        <!-- Text output showing recognized sign language gesture -->
                         <div id="output" class="output-text">Waiting for detection...</div>
                     </div>
                 </div>
                 
-                <!-- Help Section positioned below live camera section -->
+                <!-- User instructions section with step-by-step guide -->
                 <div class="help-section-container">
                     <div class="help-section">
                         <div class="help-content">
                             <h2>How to Use</h2>
+                            <!-- Step-by-step instructions for users -->
                             <div class="help-steps">
                                 <div class="step">
                                     <div class="step-number">1</div>
@@ -88,8 +115,10 @@
                 </div>
             </div>
             
+            <!-- Sidebar tutorial panel with example signs -->
             <aside class="tutorial-panel">
                 <div class="tutorial-title">Try These Signs</div>
+                <!-- Example sign demonstrations with GIFs and descriptions -->
                 <div class="tutorial-section">
                     <h3>Hello</h3>
                     <img src="src/assets/gifs/hello.gif" alt="Hello sign demonstration" class="tutorial-gif">
@@ -109,30 +138,37 @@
             </aside>
         </div>
         
-        <!-- Audio Input Section -->
+        <!-- Voice-to-sign language conversion section -->
         <div class="audio-section">
             <div class="audio-container">
+                <!-- Section header explaining voice input functionality -->
                 <div class="audio-header">
                     <h2>Voice to Sign Language</h2>
                     <p>Speak to see the matching sign language gesture</p>
                 </div>
                 
+                <!-- Voice input controls and status -->
                 <div class="audio-controls">
+                    <!-- Microphone button to start/stop voice recognition -->
                     <button id="mic-button" class="mic-button" aria-label="Start voice recognition">
                         <div class="mic-icon">🎤</div>
                         <span class="mic-text">Click to Speak</span>
                     </button>
+                    <!-- Status indicator for voice recognition state -->
                     <div class="audio-status">
                         <span id="audio-status-text">Ready to listen</span>
                     </div>
                 </div>
                 
+                <!-- Voice recognition output display -->
                 <div class="audio-output">
+                    <!-- Display of recognized speech text -->
                     <div class="speech-display">
                         <h3>You Said:</h3>
                         <div id="speech-text" class="speech-text">Click the microphone and speak...</div>
                     </div>
                     
+                    <!-- Display of corresponding sign language GIF -->
                     <div class="gif-display">
                         <h3>Matching Sign:</h3>
                         <div id="gif-container" class="gif-container">
@@ -144,36 +180,43 @@
         </div>
     </main>
 
-    <!-- Chat Support -->
+    <!-- Interactive chat support system -->
+    <!-- Floating chat bubble to open support chat -->
     <div id="chat-bubble" class="chat-bubble" aria-label="Open chat support">
         <img src="https://img.icons8.com/color/48/000000/chat--v1.png" alt="Chat Support"/>
     </div>
 
+    <!-- Chat window for user support and assistance -->
     <div id="chat-window" class="chat-window" role="dialog" aria-labelledby="chat-header">
+        <!-- Chat window header with title and close button -->
         <div id="chat-header" class="chat-header">
             <h2 id="chat-title">Sign Language Bot</h2>
             <button id="close-chat" aria-label="Close chat">×</button>
         </div>
+        <!-- Chat message area for conversation history -->
         <div id="chat-body" class="chat-body">
             <div class="chat-message bot">
                 <p>Hello! I'm your Sign Language Assistant. Ask me anything about this project, sign language, or the technology behind it!</p>
             </div>
         </div>
+        <!-- Chat input area for user messages -->
         <div id="chat-footer" class="chat-footer">
             <input type="text" id="chat-input" placeholder="Ask a question..." aria-label="Type your message">
             <button id="chat-send" aria-label="Send message">Send</button>
         </div>
     </div>
 
-    <!-- Loading Overlay -->
+    <!-- Loading overlay shown during AI model initialization -->
     <div id="loading-overlay" class="loading-overlay">
         <div class="loading-content">
+            <!-- Animated loading spinner -->
             <div class="loading-spinner"></div>
             <h3>Loading AI Model...</h3>
             <p>Please wait while we initialize the sign language detection system</p>
         </div>
     </div>
 
+    <!-- Main JavaScript file containing all application logic -->
     <script src="src/js/script.js"></script>
 </body>
 </html>
