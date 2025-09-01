@@ -382,10 +382,18 @@ function saveUserProgress() {
 
 // Start a learning category
 function startCategory(categoryId) {
-    const category = learningCategories[categoryId];
-    if (category) {
-        // Create and show category modal
-        showCategoryModal(category);
+    try {
+        const category = learningCategories[categoryId];
+        if (category) {
+            // Create and show category modal
+            showCategoryModal(category);
+        } else {
+            console.error(`Category ${categoryId} not found`);
+            alert('Sorry, this category is not available at the moment.');
+        }
+    } catch (error) {
+        console.error('Error starting category:', error);
+        alert('Sorry, there was an error loading this category. Please try again.');
     }
 }
 
@@ -588,15 +596,19 @@ function isLessonCompleted(categoryTitle, lessonId) {
 
 // Start a specific lesson
 function startLesson(categoryTitle = null, lessonId = null) {
-    if (categoryTitle && lessonId) {
-        // Start specific lesson
-        console.log(`Starting lesson ${lessonId} from ${categoryTitle}`);
-        // Here you would implement the actual lesson interface
-        showLessonInterface(categoryTitle, lessonId);
-    } else {
-        // Start featured lesson
-        console.log('Starting featured lesson');
-        showLessonInterface('Basic Greetings', 1);
+    try {
+        if (categoryTitle && lessonId) {
+            // Start specific lesson
+            console.log(`Starting lesson ${lessonId} from ${categoryTitle}`);
+            showLessonInterface(categoryTitle, lessonId);
+        } else {
+            // Start featured lesson
+            console.log('Starting featured lesson');
+            showLessonInterface('Basic Greetings', 1);
+        }
+    } catch (error) {
+        console.error('Error starting lesson:', error);
+        alert('Sorry, there was an error starting the lesson. Please try again.');
     }
 }
 
@@ -637,6 +649,7 @@ function showLessonInterface(categoryTitle, lessonId) {
                             allowfullscreen
                             class="lesson-video">
                         </iframe>
+                        <div class="coming-soon-text">Coming Soon</div>
                     </div>
                     <div class="lesson-details">
                         <h3>${lesson.title}</h3>
@@ -662,6 +675,12 @@ function showLessonInterface(categoryTitle, lessonId) {
     `;
     
     document.body.appendChild(modal);
+    
+    // Reset step indicators for new lesson
+    currentStep = 1;
+    setTimeout(() => {
+        updateStepIndicators();
+    }, 100);
     
     // Add lesson modal styles
     if (!document.getElementById('lesson-modal-styles')) {
@@ -718,11 +737,27 @@ function showLessonInterface(categoryTitle, lessonId) {
                 border-radius: 15px;
                 margin-bottom: 1.5rem;
                 overflow: hidden;
+                position: relative;
             }
             .lesson-video {
                 width: 100%;
                 height: 100%;
                 border-radius: 15px;
+            }
+            .coming-soon-text {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(123, 47, 242, 0.9);
+                color: #fff;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 500;
+                border: 1px solid rgba(123, 47, 242, 0.3);
+                backdrop-filter: blur(10px);
+                z-index: 10;
             }
             .lesson-details {
                 margin-bottom: 1.5rem;
@@ -794,24 +829,63 @@ function showLessonInterface(categoryTitle, lessonId) {
 }
 
 // Lesson navigation functions
+let currentStep = 1;
+const totalSteps = 3;
+
 function previousStep() {
-    console.log('Previous step');
-    // Implement previous step logic
+    if (currentStep > 1) {
+        currentStep--;
+        updateStepIndicators();
+        console.log(`Moved to step ${currentStep}`);
+    }
 }
 
 function nextStep() {
-    console.log('Next step');
-    // Implement next step logic
+    if (currentStep < totalSteps) {
+        currentStep++;
+        updateStepIndicators();
+        console.log(`Moved to step ${currentStep}`);
+    }
+}
+
+function updateStepIndicators() {
+    const indicators = document.querySelectorAll('.step-indicator');
+    indicators.forEach((indicator, index) => {
+        if (index + 1 === currentStep) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
 }
 
 // Complete lesson
 function completeLesson() {
+    // Get current lesson info from the modal
+    const modal = document.querySelector('.lesson-modal');
+    if (!modal) {
+        console.error('Lesson modal not found');
+        return;
+    }
+    
+    const modalHeader = modal.querySelector('.lesson-modal-header h2');
+    if (!modalHeader) {
+        console.error('Lesson modal header not found');
+        return;
+    }
+    
+    // Extract category and lesson info from the header
+    const headerText = modalHeader.textContent;
+    const parts = headerText.split(' - Lesson ');
+    const categoryTitle = parts[0];
+    const lessonId = parseInt(parts[1]) || 1;
+    
     // Mark lesson as completed
     const lesson = {
-        category: 'Basic Greetings', // This should be dynamic
-        id: 1, // This should be dynamic
+        category: categoryTitle,
+        id: lessonId,
         completedAt: new Date().toISOString(),
-        timeSpent: 5 // This should be tracked
+        timeSpent: 5 // This should be tracked in a real implementation
     };
     
     if (!isLessonCompleted(lesson.category, lesson.id)) {
@@ -833,7 +907,7 @@ function completeLesson() {
     }
     
     // Close lesson modal
-    document.querySelector('.lesson-modal').remove();
+    modal.remove();
 }
 
 // Show completion message
@@ -952,6 +1026,197 @@ function scrollToTop() {
     });
 }
 
+// Initialize chat functionality for learn page
+function initializeChatFunctionality() {
+    const chatBubble = document.getElementById('chat-bubble');
+    const chatWindow = document.getElementById('chat-window');
+    const closeChat = document.getElementById('close-chat');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatBody = document.getElementById('chat-body');
+
+    if (!chatBubble || !chatWindow || !closeChat || !chatInput || !chatSend || !chatBody) {
+        console.warn('Chat elements not found on learn page');
+        return;
+    }
+
+    // Chat functionality
+    chatBubble.addEventListener('click', () => {
+        chatWindow.style.display = 'flex';
+        chatBubble.style.display = 'none';
+        chatInput.focus();
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatWindow.style.display = 'none';
+        chatBubble.style.display = 'flex';
+    });
+
+    chatSend.addEventListener('click', async () => {
+        await sendMessage();
+    });
+
+    chatInput.addEventListener('keypress', async (e) => {
+        if (e.key === 'Enter') {
+            await sendMessage();
+        }
+    });
+
+    async function sendMessage() {
+        const userMessage = chatInput.value.trim();
+        if (userMessage === '') return;
+
+        appendMessage(userMessage, 'user');
+        chatInput.value = '';
+
+        // Show typing indicator
+        const typingIndicator = appendMessage('Typing...', 'bot');
+        
+        try {
+            const botResponse = await getBotResponse(userMessage);
+            
+            // Remove typing indicator and show actual response
+            typingIndicator.remove();
+            appendMessage(botResponse, 'bot');
+        } catch (error) {
+            typingIndicator.remove();
+            appendMessage('Sorry, I encountered an error. Please try again.', 'bot');
+        }
+    }
+
+    function appendMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', sender);
+        const p = document.createElement('p');
+        p.innerText = message;
+        messageElement.appendChild(p);
+        chatBody.appendChild(messageElement);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        return messageElement;
+    }
+
+    async function getBotResponse(message) {
+        const apiKey = 'AIzaSyCDbO3317S6nblaTpbcAa6iLzfqAf6YaQ8';
+        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + apiKey;
+
+        // Allowed topics keywords for broader matching
+        const allowedTopics = [
+            'sign language','what is sign language','why is sign laguage used', 'gesture', 'deaf', 'hard-of-hearing', 'media pipe', 
+            'tensorflow', 'machine learning', 'project', 'technology', 'tech',
+            'model', 'webcam', 'pose', 'hand tracking', 'pytorch', 'deep learning',
+            'ai', 'artificial intelligence', 'computer vision', 'neural network' , 'what' , 'why not pytorch?' , 'what is tensorflow?',
+            'learn', 'learning', 'lesson', 'practice', 'education', 'tutorial', 'course'
+        ];
+
+        const lowerCaseMessage = message.toLowerCase();
+
+        // Check if message contains ANY allowed topic word as substring
+        const isAllowed = allowedTopics.some(topic => lowerCaseMessage.includes(topic));
+        
+        if (!isAllowed) {
+            return "Sorry, I can only answer questions about sign language, learning, or the technology used in this project. Feel free to ask about lessons, MediaPipe, TensorFlow, computer vision, or sign language in general!";
+        }
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: `Answer only about sign language learning, lessons, or the technology used in this sign language detection project. Stay on topic and be helpful. Question: "${message}"`
+                        }]
+                    }]
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+
+            if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+                let responseText = data.candidates[0].content.parts[0].text;
+
+                // Replace markdown headers with bold text
+                responseText = responseText.replace(/^#+\s*(.*)$/gm, (_, title) => `\n${title}\n`);
+                // Replace markdown bold (**text**) with just text
+                responseText = responseText.replace(/\*\*(.*?)\*\*/g, '$1');
+                // Replace markdown italics (*text*) with just text
+                responseText = responseText.replace(/\*(.*?)\*/g, '$1');
+                // Replace markdown lists with simple bullet points
+                responseText = responseText.replace(/^\s*[-*]\s+/gm, '• ');
+                // Remove code block markers
+                responseText = responseText.replace(/```[\s\S]*?```/g, '');
+                // Remove horizontal rules
+                responseText = responseText.replace(/^---$/gm, '');
+
+                // Trim extra newlines
+                responseText = responseText.replace(/\n{3,}/g, '\n\n').trim();
+                return responseText;
+            } else {
+                return "Sorry, I couldn't get a proper response from the AI service. Please try asking your question again.";
+            }
+        } catch (error) {
+            console.error('Chat API error:', error);
+            return "Sorry, there was an error connecting to the AI service. Please check your internet connection and try again.";
+        }
+    }
+
+    // Keyboard navigation for accessibility
+    document.addEventListener('keydown', (e) => {
+        // Escape key to close chat
+        if (e.key === 'Escape' && chatWindow.style.display === 'flex') {
+            chatWindow.style.display = 'none';
+            chatBubble.style.display = 'flex';
+        }
+        
+        // Ctrl/Cmd + K to open chat
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            if (chatWindow.style.display !== 'flex') {
+                chatWindow.style.display = 'flex';
+                chatBubble.style.display = 'none';
+                chatInput.focus();
+            }
+        }
+    });
+}
+
+// Initialize floating action button
+function initializeFloatingActionButton() {
+    const floatingActionBtn = document.querySelector('.floating-action-btn');
+    
+    if (!floatingActionBtn) {
+        console.warn('Floating action button not found');
+        return;
+    }
+
+    // Add click event listener
+    floatingActionBtn.addEventListener('click', scrollToTop);
+
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            floatingActionBtn.style.display = 'flex';
+            floatingActionBtn.style.opacity = '1';
+        } else {
+            floatingActionBtn.style.opacity = '0';
+            setTimeout(() => {
+                if (window.pageYOffset <= 300) {
+                    floatingActionBtn.style.display = 'none';
+                }
+            }, 300);
+        }
+    });
+
+    // Initially hide the button
+    floatingActionBtn.style.display = 'none';
+    floatingActionBtn.style.opacity = '0';
+    floatingActionBtn.style.transition = 'opacity 0.3s ease';
+}
+
 // Initialize the learn page
 document.addEventListener('DOMContentLoaded', function() {
     loadUserProgress();
@@ -960,6 +1225,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const videoPlaceholder = document.querySelector('.video-placeholder');
     if (videoPlaceholder) {
         videoPlaceholder.addEventListener('click', () => startLesson());
+    }
+    
+    // Add click event for featured video preview
+    const featuredVideoPreview = document.querySelector('.featured-video-preview');
+    if (featuredVideoPreview) {
+        featuredVideoPreview.addEventListener('click', () => startLesson());
     }
     
     // Add hover effects for category cards
@@ -972,4 +1243,10 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0)';
         });
     });
+    
+    // Initialize chat functionality for learn page
+    initializeChatFunctionality();
+    
+    // Initialize floating action button
+    initializeFloatingActionButton();
 });

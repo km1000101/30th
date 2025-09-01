@@ -1310,6 +1310,37 @@ canvas {
     font-size: 0.9rem;
 }
 
+/* Floating Action Button */
+.floating-action-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #7b2ff2, #f39108);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(123, 47, 242, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(123, 47, 242, 0.6);
+}
+
+.floating-action-btn:active {
+    transform: translateY(-1px);
+}
+
 /* Responsive Design for Learn Page */
 @media (max-width: 768px) {
     .lesson-container {
@@ -1331,6 +1362,14 @@ canvas {
     
     .section-title {
         font-size: 2rem;
+    }
+    
+    .floating-action-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
     }
 }
 
